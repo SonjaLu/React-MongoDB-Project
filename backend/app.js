@@ -7,16 +7,10 @@ const mongoose = require('mongoose');
 
 const cors = require('cors');
 
-const winston = require('winston');
 
-// Konfiguriere den Logger
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.simple(),
-    transports: [new winston.transports.Console()],
-});
-
-
+/**
+ * Verbinde mit der Mongo DB.
+ */
 const connectString = process.env.MONGO_DB_CLIENT;
 app.use(async (req, res, next) => {
     try {
@@ -31,7 +25,6 @@ app.use(async (req, res, next) => {
         next();
     } catch (error) {
         console.log("ERROR " + error);
-        logger.error("Error: " + error);
     }
 })
 
@@ -46,15 +39,21 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(cors());
 
-const todoSchema = new mongoose.Schema({
-    text: String,
-    category: String,
-    id: String,
-    done: String
+/**
+ * sergej@2023-10-30 - erstelle Schema für die Daten der DB.
+ * Alte Parameter erstmal auskommenitert. 
+ * TODO: Parameter werden später eingefügt.
+ */
+const reviewSchema = new mongoose.Schema({
+
+    // text: String,
+    // category: String,
+    // id: String,
+    // done: String
 })
 
 //collection in der DB wo daten gespeichert werden
-const Todo = mongoose.model('Todos', todoSchema);
+const ReviewModel = mongoose.model('RestaurantReviews', reviewSchema);
 
 
 app.get("/", (req, res) => {
@@ -71,47 +70,50 @@ app.get("/health-check", (req, res) => {
     console.log("Running health check");
 })
 
-
-app.get("/todos", async (req, res) => {
+/**
+ * sergej@2023-10-30 - Bekomme die Reviews aus der DB.
+ */
+app.get("/reviews", async (req, res) => {
     try {
 
-        const todos = await Todo.find({});
+        const reviews = await ReviewModel.find({});
         res.status(200).send({
-            "todos": todos,
-            "message": "fetched todos"
+            "reviews": reviews,
+            "message": "fetched reviews"
         });
     } catch {
-        res.status(500).send({ "message": "could not fetch todos" });
+        res.status(500).send({ "message": "could not fetch reviews" });
     }
 })
 
-
-app.post("/addTodo", async (req, res) => {
+/**
+ * sergej@2023-10-30 - FÜge neues Review in die DB ein.
+ */
+app.post("/addReview", async (req, res) => {
 
     try {
-        const todoToAdd = req.body;
-        const addedTodo = await Todo.create(todoToAdd);
+        const reviewToAdd = req.body;
+        const addedReview = await ReviewModel.create(reviewToAdd);
 
-        res.status(201).send({ "message": "added new todo" });
+        res.status(201).send({ "message": "added new Review" });
     } catch {
-        res.status(500).send({ "message": "could not add todo" });
+        res.status(500).send({ "message": "could not add Review" });
     }
 })
 
 
 /**
- * 2023-10-14
- * Route zum Löschen des Todos aus der Datenbank. 
+ * Route zum Löschen des Bewertungen aus der Datenbank. 
  */
-app.post("/deleteTodo/:id", async (req, res) => {
+app.post("/deleteReview/:id", async (req, res) => {
 
     try {
-        const {todoID} = req.params;
-        await Todo.deleteOne(todoID);
+        const {reviewID} = req.params;
+        await ReviewModel.deleteOne(reviewID);
 
-        res.status(201).send({ "message": "delete todo" });
+        res.status(201).send({ "message": "delete Review" });
     } catch {
-        res.status(500).send({ "message": "could not delete todo" });
+        res.status(500).send({ "message": "could not delete Review" });
     }
 })
 
