@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
 import Login from './Login.jsx';
+import './Login.css';
+import './Register.css';
+import Register from './Register.jsx';
+import Reviews from './Reviews.jsx';
 import Welcome from './Welcome.jsx';
-import Register from './Register.jsx'; 
-import Reviews from './Register.jsx'; 
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -23,23 +25,23 @@ function App() {
   };
 
   return (
-    <>
+    <div>
       <h1 id="headline">GOURMET EXPLORER</h1>
+      {!showLogin && !showRegister && !showReviews && (
+        <Welcome
+          onLoginClick={handleLoginClick}
+          onRegisterClick={handleRegisterClick}
+          onReviewsClick={handleReviewsClick}
+        />
+      )}
 
-      <div className="showbox2">
-        <h2 id="greeting"><br /><br />W e l c o m e<br /><br /><br /> Restaurant-Tester</h2>
-        <div id="navbar">
-          <a href="#" onClick={handleLoginClick}>Login</a>
-          <a href="#" onClick={handleRegisterClick}>Register</a>
-          <a href="#" onClick={handleReviewsClick}>Reviews</a>
-        </div>
-      </div>
-
-      {showLogin ? <Login /> : null}
-      {showRegister ? <Register /> : null}
-      {showReviews ? <Reviews /> : null}
-    </>
+      {showLogin && <Login />}
+      {showRegister && <Register />}
+      {showReviews && <Reviews />}
+    </div>
   );
 }
 
+
 export default App;
+

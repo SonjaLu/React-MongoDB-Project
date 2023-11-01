@@ -12,7 +12,10 @@ function Login() {
 
   return (
     <div>
-      <h2 id="greeting">Login</h2>
+    <h1 id="headline">GOURMET EXPLORER</h1>
+    <div className="showbox2">
+      
+      <h2 id="loginheadline">Login</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
@@ -37,7 +40,10 @@ function Login() {
         <button id="submitbtn" type="submit">Submit</button>
       </form>
     </div>
+    </div>
   );
 }
 
 export default Login;
+
+
