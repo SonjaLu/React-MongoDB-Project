@@ -37,8 +37,11 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         /><br />
 
-        <button id="submitbtn" type="submit">Submit</button>
-      </form>
+<div>
+  <a id="submitbtn" href="#" role="button">Submit</a>
+</div>
+       
+       </form>
     </div>
     </div>
   );

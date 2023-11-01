@@ -87,7 +87,9 @@ function Register() {
               />
             </div>
           </div>
-          <button id="submitbtn" type="submit">Submit</button>
+          <div>
+  <a id="submitbtn" href="#" role="button">Submit</a>
+</div>
         </form>
       </div>
     </div>
