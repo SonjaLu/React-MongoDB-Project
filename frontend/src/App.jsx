@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import './App.css';
 import Login from './Login.jsx';
 import './Login.css';
+import './Inputfield.css';
 import './Register.css';
-import './submitbtn.css';
+import './Submitbtn.css';
+import './Showbox.css';
 import Register from './Register.jsx';
 import Reviews from './Reviews.jsx';
 import Welcome from './Welcome.jsx';
@@ -15,6 +17,14 @@ function App() {
 
   const handleLoginClick = () => {
     setShowLogin(true);
+  };
+
+  const handleCloseRegister = () => {
+    setShowRegister(false);
+  };
+
+  const handleCloseLogin = () => {
+    setShowLogin(false);
   };
 
   const handleRegisterClick = () => {
@@ -36,9 +46,9 @@ function App() {
         />
       )}
 
-      {showLogin && <Login />}
-      {showRegister && <Register />}
-      {showReviews && <Reviews />}
+      {showLogin && <Login onCloseLogin={handleCloseLogin} />}
+{showRegister && <Register onCloseRegister={handleCloseRegister} />}
+{showReviews && <Reviews />}
     </div>
   );
 }

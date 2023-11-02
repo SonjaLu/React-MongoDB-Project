@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Login() {
+function Login( {onCloseLogin} ) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -40,6 +40,11 @@ function Login() {
 <div>
   <a id="submitbtn" href="#" role="button">Submit</a>
 </div>
+<div>
+<div className="back-button" onClick={onCloseLogin} style={{ position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer' }}>
+        &#8592; back
+      </div>
+    </div>
        
        </form>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-function Register() {
+
+function Register({ onCloseRegister }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -90,6 +91,11 @@ function Register() {
           <div>
   <a id="submitbtn" href="#" role="button">Submit</a>
 </div>
+<div>
+<div className="back-button" onClick={onCloseRegister} style={{ position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer' }}>
+        &#8592; back
+      </div>
+    </div>
         </form>
       </div>
     </div>
