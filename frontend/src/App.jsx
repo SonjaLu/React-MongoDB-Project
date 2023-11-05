@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import './css/App.css'
+import './css/new_review.css'
 import Headline from './components/Headline'
 //import Login from './components/Login'
 import Register from './components/Register'
+import NewReview from './components/NewReview'
 function App() {
 
   return (
@@ -11,6 +13,7 @@ function App() {
       {/**  Einfach zum Testen eingefügt. 
       <Register /> 
       */}
+      <NewReview />
     </div>
   )
 }

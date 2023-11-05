@@ -1,3 +1,8 @@
+/**
+ * sergej@2023-11-04
+ * => Fenster um den Benutzer zu registrieren.
+ * @returns 
+ */
 function Register() {
     return (
         <div>
