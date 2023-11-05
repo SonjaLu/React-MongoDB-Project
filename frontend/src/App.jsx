@@ -8,7 +8,9 @@ function App() {
   return (
     <div>
       <Headline title="Restaurant Tester"/>
-      <Register />
+      {/**  Einfach zum Testen eingefügt. 
+      <Register /> 
+      */}
     </div>
   )
 }
