@@ -1,7 +1,14 @@
 import React from 'react';
 
-function Review() {
+function Reviews({ onShowAllReviews }) {  
     return (
-        <div>Hello</div>);}
+        <div>
+          
+            <button onClick={onShowAllReviews}>Show All Reviews</button>
+            
+        </div>
+    );
+}
 
-export default Review;
+
+export default Reviews;

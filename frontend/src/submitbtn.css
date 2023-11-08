@@ -20,6 +20,7 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
     z-index: 3;
     position: relative;
+    text-shadow: none;
   }
   
   #submitbtn:hover {
