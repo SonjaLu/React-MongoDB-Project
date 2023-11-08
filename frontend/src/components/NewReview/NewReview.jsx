@@ -1,10 +1,11 @@
-
+import React from 'react';
+import './new_review.css'
 /**
  * sergej@2023-11-04 
  * Formular um die neue Bewertungen zu erstellen.
  * @returns 
  */
-function NewReview (){
+const  NewReview = () =>{
     return  (
         <div className="restaurant-form">
             <h1>Neue Restaurant Bewertung erstellen</h1>

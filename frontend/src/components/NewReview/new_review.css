@@ -30,28 +30,33 @@ textarea {
   height: 100px;
   margin-bottom: 20px;
 }
-/* css für neue Bewertungen.*/
+
+
+
+/* CSS für neue Bewertungen. */
 .rating {
   font-size: 24px;
 }
 
 .rating input {
-  display: none;
+  position: absolute;
+  opacity: 0;
 }
 
 .rating label {
   display: inline-block;
   cursor: pointer;
+  color: #ccc; /* Standardfarbe der Sterne */
 }
 
 .rating label::before {
   content: "\2605";
-  color: #ccc;
 }
 
 .rating input:checked ~ label::before {
-  color: #f7d222;
+  color: #f7d222; /* Gelbe Farbe für ausgewählte Sterne */
 }
+
 
 input[type="submit"] {
   background-color: #007BFF;
@@ -65,3 +70,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #0056b3;
 }
+
+
+
+
