@@ -7,7 +7,7 @@ const restaurantSchema = new mongoose.Schema({
   state: String,
   pic: String,
   reviews: Number,
- 
+  starRating: String 
 });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);

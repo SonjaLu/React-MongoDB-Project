@@ -1,116 +1,123 @@
-import React from 'react';
-
-const express = require('express');
-const app = express();
-const port = 5173;
-
-
 const restaurants = [
-    {
-        "Name": "Berliner Schnitzelhaus",
-        "Category": "deutsch",
-        "Location": "Berlin",
-        "Bundesland": "Berlin",
-        "Pic": "./assets/brick-wall.jpg",
-        "AnzahlBewertungen": 273,
-        "SterneDisplay": "★★★★☆"
-    },
-    {
-      "Name": "Münchner Biergarten",
-      "Category": "deutsch",
-      "Location": "München",
-      "Bundesland": "Bayern",
-      "Pic": "./assets/table.jpg",
-      "AnzahlBewertungen": 88,
-      "SterneDisplay": "★★★★☆"
-    },
-    {
-        "Name": "Roma",
-        "Category": "italienisch",
-        "Location": "Hannover",
-        "Bundesland": "Niedersachsen",
-        "Pic": "./assets/eat.jpg",
-        "AnzahlBewertungen": 474,
-        "SterneDisplay": "★★★★☆"
-    },
-    {
-      "Name": "Tapas Barcelona",
-      "Category": "spanisch",
-      "Location": "Hamburg",
-      "Bundesland": "Hamburg",
-      "Pic": "./assets/red-wine.jpg",
-      "AnzahlBewertungen": 116,
-      "SterneDisplay": "★★★★★"
-    },
-    {
-      "Name": "Santos",
-      "Category": "spanisch",
-      "Location": "Köln",
-      "Bundesland": "Nordrhein-Westfalen",
-      "Pic": "./assets/urban.jpg",
-      "AnzahlBewertungen": 85,
-      "SterneDisplay": "★★★★★"
-    },
-    {
-      "Name": "Sushi Samurai",
-      "Category": "asiatisch",
-      "Location": "Düsseldorf",
-      "Bundesland": "Nordrhein-Westfalen",
-      "Pic": "./assets/sushi.jpg",
-      "AnzahlBewertungen": 112,
-      "SterneDisplay": "★★★☆☆"
-    },
-    {
-      "Name": "Dragon Noodles",
-      "Category": "asiatisch",
-      "Location": "Frankfurt",
-      "Bundesland": "Hessen",
-      "Pic": "./assets/dragon.jpg",
-      "AnzahlBewertungen": 87,
-      "SterneDisplay": "★★★★☆"
-    },
-    {
-      "Name": "Balkan Grill",
-      "Category": "balkan",
-      "Location": "Stuttgart",
-      "Bundesland": "Baden-Württemberg",
-      "Pic": "./assets/balkan.jpg",
-      "AnzahlBewertungen": 127,
-      "SterneDisplay": "★★★★☆"
-    },
-    {
-      "Name": "Adriatic Seafood",
-      "Category": "balkan",
-      "Location": "Leipzig",
-      "Bundesland": "Sachsen",
-      "Pic": "./assets/seafood.jpg",
-      "AnzahlBewertungen": 67,
-      "SterneDisplay": "★☆☆☆☆"
-    },
-    {
-      "Name": "Global Tastes",
-      "Category": "sonstige",
-      "Location": "Nürnberg",
-      "Bundesland": "Bayern",
-      "Pic": "./assets/vegan.jpg",
-      "AnzahlBewertungen": 140,
-      "SterneDisplay": "★★★★★"
-    },
-    {
-      "Name": "Fusion Delights",
-      "Category": "sonstige",
-      "Location": "Bremen",
-      "Bundesland": "Bremen",
-      "Pic": "./assets/barista.jpg",
-      "AnzahlBewertungen": 162,
-      "SterneDisplay": "★☆☆☆☆"
-    }
-  ]
+  {
+      "name": "Berliner Schnitzelhaus",
+      "category": "deutsch",
+      "location": "Berlin",
+      "state": "Berlin",
+      "pic": "./assets/brick-wall.jpg",
+      "reviews": 273,
+      "starRating": "★★★★☆"
+  },
+  {
+      "name": "Münchner Biergarten",
+      "category": "deutsch",
+      "location": "München",
+      "state": "Bayern",
+      "pic": "./assets/table.jpg",
+      "reviews": 88,
+      "starRating": "★★★★☆"
+  },
+  {
+      "name": "Roma",
+      "category": "italienisch",
+      "location": "Hannover",
+      "state": "Niedersachsen",
+      "pic": "./assets/eat.jpg",
+      "reviews": 474,
+      "starRating": "★★★★☆"
+  },
+  {
+      "name": "Tapas Barcelona",
+      "category": "spanisch",
+      "location": "Hamburg",
+      "state": "Hamburg",
+      "pic": "./assets/red-wine.jpg",
+      "reviews": 116,
+      "starRating": "★★★★★"
+  },
+  {
+      "name": "Santos",
+      "category": "spanisch",
+      "location": "Köln",
+      "state": "Nordrhein-Westfalen",
+      "pic": "./assets/urban.jpg",
+      "reviews": 85,
+      "starRating": "★★★★★"
+  },
+  {
+      "name": "Sushi Samurai",
+      "category": "asiatisch",
+      "location": "Düsseldorf",
+      "state": "Nordrhein-Westfalen",
+      "pic": "./assets/sushi.jpg",
+      "reviews": 112,
+      "starRating": "★★★☆☆"
+  },
+  {
+      "name": "Dragon Noodles",
+      "category": "asiatisch",
+      "location": "Frankfurt",
+      "state": "Hessen",
+      "pic": "./assets/dragon.jpg",
+      "reviews": 87,
+      "starRating": "★★★★☆"
+  },
+  {
+      "name": "Balkan Grill",
+      "category": "balkan",
+      "location": "Stuttgart",
+      "state": "Baden-Württemberg",
+      "pic": "./assets/balkan.jpg",
+      "reviews": 127,
+      "starRating": "★★★★☆"
+  },
+  {
+      "name": "Adriatic Seafood",
+      "category": "balkan",
+      "location": "Leipzig",
+      "state": "Sachsen",
+      "pic": "./assets/seafood.jpg",
+      "reviews": 67,
+      "starRating": "★☆☆☆☆"
+  },
+  {
+      "name": "Global Tastes",
+      "category": "sonstige",
+      "location": "Nürnberg",
+      "state": "Bayern",
+      "pic": "./assets/vegan.jpg",
+      "reviews": 140,
+      "starRating": "★★★★★"
+  },
+  {
+      "name": "Fusion Delights",
+      "category": "sonstige",
+      "location": "Bremen",
+      "state": "Bremen",
+      "pic": "./assets/barista.jpg",
+      "reviews": 162,
+      "starRating": "★☆☆☆☆"
+  }
+];
 
-  app.get('/restaurants', (req, res) => {
-    res.json(restaurants);
-  });
+const uploadRestaurants = () => {
+  fetch('http://localhost:8080/restaurants', { 
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(restaurants),
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+};
 
-  app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
-  });
+return (
+  <div>
+    <button onClick={uploadRestaurants}>Upload Restaurants to Database</button>
+  </div>
+);
+
+
+export default RestaurantsReviewed;
