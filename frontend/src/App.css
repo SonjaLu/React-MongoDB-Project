@@ -47,6 +47,9 @@ body {
 a {
   text-decoration: none;
   color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px black;
+  font-size: 16px;
 }
 
 #greeting {
@@ -57,57 +60,14 @@ a {
   padding: 0;
   text-align: center;
   font-family: 'Lobster', sans-serif;
-}
-
-.showbox {
-  width: 40%;
-  height: 60%;
-  background-color: rgb(70, 111, 111);
-  justify-content: center;
-  align-items: center;
-  display: flex;
-position: absolute;
-color: white;
-top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-z-index: 0;
-}
-
-.showbox2 {
-  width: 40%;
-  height: 60%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  position: relative;
   color: white;
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  z-index: 0;
+  z-index: 2;
+  text-shadow: 2px 2px 4px #000000;
 }
 
-.showbox2::before {
-  content: "";
-  background-image: url('assets/mediterranean-cuisine.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.6; 
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  border-radius: 10px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-}
+
+
+
 
 
 
