@@ -37,9 +37,10 @@ function Login( {onCloseLogin} ) {
           onChange={(e) => setPassword(e.target.value)}
         /><br />
 
-<div>
-  <a id="submitbtn" href="#" role="button">Submit</a>
-</div>
+
+<button id="submitbtn" role="button" style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
+  Submit
+</button>
 <div>
 <div className="back-button" onClick={onCloseLogin} style={{ position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer' }}>
         &#8592; back
