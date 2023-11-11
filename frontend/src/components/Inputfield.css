@@ -1,0 +1,17 @@
+input {
+    background: transparent;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
+    height: 30px;
+    text-align: left !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-decoration: none;
+    padding-left: 10px !important;
+    
+}
+
+label {
+    font-weight: bold;
+}
