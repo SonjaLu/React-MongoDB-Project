@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const Port = process.env.PORT;
 const mongoose = require('mongoose');
+const multer = require('multer')
 
 const cors = require('cors');
 
@@ -36,7 +37,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.json());
+//erstmal auskommentiert da 
+//app.use(express.json());
+app.use ('/uploads', express.static ('uploads'))
 app.use(cors());
 
 /**
@@ -120,4 +123,26 @@ app.post("/deleteReview/:id", async (req, res) => {
 
 app.listen(Port, () => {
     console.log("Running backend");
+})
+
+/**
+ *sergej@2023-11-10 
+ => Route um die Posts zu bekommen / zu senden.
+ */
+app.get("/posts", (req, res) => {
+
+});
+
+app.post("/posts",(req,res) => {
+
+})
+
+const storage = multer.diskStorage({
+    destination: function (req,res, cb) {
+        cb (null, '/uploads')
+    },
+    filemane : function(req, file, cb){
+        const uniqueSuffix = Date.now() + '-' + originalName 
+        cb(null, file.filemane + '-' + uniqueSuffix)
+    }
 })
