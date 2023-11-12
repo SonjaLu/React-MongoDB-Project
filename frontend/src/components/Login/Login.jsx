@@ -28,8 +28,18 @@ function Login (){
 
  
  import React, { useState } from 'react';
+import './login.css';
+import '../showBox/submitbtn.css';
+import { useNavigate } from 'react-router-dom';
 
-function Login( {onCloseLogin} ) {
+function Login() {
+  const navigate = useNavigate();
+
+  const onCloseLogin = () => {
+    
+    navigate('/');
+  };
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -40,7 +50,7 @@ function Login( {onCloseLogin} ) {
   };
 
   return (
-    <div>
+    <>
     <h1 id="headline">GOURMET EXPLORER</h1>
     <div className="showbox2">
       
@@ -78,7 +88,7 @@ function Login( {onCloseLogin} ) {
        
        </form>
     </div>
-    </div>
+    </>
   );
 }
 

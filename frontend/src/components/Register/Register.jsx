@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Register.css';
 
-
-function Register({ onCloseRegister }) {
+function Register() {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,9 +15,12 @@ function Register({ onCloseRegister }) {
     e.preventDefault(); 
     // Registrierungslogik
   };
+  const onCloseRegister = () => {
+    navigate('/');
+  };
 
   return (
-    <div>
+    <>
       <h1 id="headline">GOURMET EXPLORER</h1>
       <div className="showbox2">
         <h2 id="registerheadline">Register</h2>
@@ -98,7 +103,7 @@ function Register({ onCloseRegister }) {
     </div>
         </form>
       </div>
-    </div>
+    </>
   );
 }
 
