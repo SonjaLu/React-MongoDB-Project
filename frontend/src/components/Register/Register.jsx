@@ -58,9 +58,7 @@ function Register({ onCloseRegister }) {
 
   return (
     <div>
-      {/**
       <h1 id="headline">GOURMET EXPLORER</h1>
-  */}
       <div className="showbox2">
         <h2 id="registerheadline">Register</h2>
         <form ref ={formRef} onSubmit={handleSubmit}>
