@@ -8,6 +8,22 @@ const multer = require('multer')
 
 const cors = require('cors');
 
+/**
+ * sergej@2023-11-12
+ * Bcrypt eingefügt
+ */
+const bcrypt = require('bcrypt');
+
+/**
+ * sergej@2023-11-12
+ * rateLimit für die Anzahl der Zugriffe etc eingefügt.
+ */
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 2// Limit each IP to 100 requests per `window` (here, per 15 minutes).
+})
 
 /**
  * Verbinde mit der Mongo DB.
@@ -54,6 +70,60 @@ const reviewSchema = new mongoose.Schema({
     // id: String,
     // done: String
 })
+
+/**
+ * sergej@2023-11-12
+ * => Shema für die UserData.
+ * minLength + maxLength eingefügt, erstmal auskommentiert. Später kann man noch verwenden.
+ */
+const userShema = new mongoose.Schema ({
+
+    id : {
+        type: String,
+        required: true
+    },
+
+
+    firstName: {
+        type: String,
+        required: true,
+        //minlength : 3,
+        //maxLength: 30
+    },
+    lastName: {
+        type: String,
+        required: true,
+        //minlength : 5
+    },
+
+    email: {
+        type: String,
+        required: true,
+        //minlength : 10
+    },
+
+
+    username :{
+        type: String,
+        required: true,
+        //minlength : 7
+    },
+    
+    hashedPassword: {
+        type: String,
+        required: true,
+        //minlength : 8
+    },
+    hashedPasswordConfirm: {
+        type: String,
+        required: true,
+        //minlength : 3
+    }
+})
+
+//sergej@2023-11-12 shema für User
+const UserModel = mongoose.model('User', userShema);
+
 
 //collection in der DB wo daten gespeichert werden
 const ReviewModel = mongoose.model('RestaurantReviews', reviewSchema);
@@ -121,28 +191,63 @@ app.post("/deleteReview/:id", async (req, res) => {
 })
 
 
-app.listen(Port, () => {
-    console.log("Running backend");
-})
-
 /**
  *sergej@2023-11-10 
  => Route um die Posts zu bekommen / zu senden.
  */
-app.get("/posts", (req, res) => {
+ app.get("/posts", (req, res) => {
 
-});
+ });
+ 
+ app.post("/posts",(req,res) => {
+ 
+ })
+ 
+ const storage = multer.diskStorage({
+     destination: function (req,res, cb) {
+         cb (null, '/uploads')
+     },
+     filemane : function(req, file, cb){
+         const uniqueSuffix = Date.now() + '-' + originalName 
+         cb(null, file.filemane + '-' + uniqueSuffix)
+     }
+ })
+ 
+ /**
+  * sergej@2023-11-12
+  */
+ //route für Register.
+ app.use(express.json());
+ app.post("/register", limiter, async (req,res) => {
+     console.log(req.body);
 
-app.post("/posts",(req,res) => {
+     try{
+     const {id, firstName, lastName, email, username, password, passwordRepeat} = req.body;
+     if (!firstName || !email || !password || !passwordRepeat|| !username || !lastName) {
+        return res.status(404).send({message: "Nich alle Felder wurden ausgefüllt"});
+     }
 
-})
+     const existingUser = await UserModel.findOne({email});
+     if (existingUser){
+        return res.status(409).send({message: "Benutzer ist schon vorhanden"});
+     }
 
-const storage = multer.diskStorage({
-    destination: function (req,res, cb) {
-        cb (null, '/uploads')
-    },
-    filemane : function(req, file, cb){
-        const uniqueSuffix = Date.now() + '-' + originalName 
-        cb(null, file.filemane + '-' + uniqueSuffix)
+     const hashedPassword = await bcrypt.hash(password, 10);
+     const hashedPasswordConfirm = await bcrypt.hash(passwordRepeat, 10);
+
+
+     const user = new UserModel({id, firstName, lastName, email, username, hashedPassword, hashedPasswordConfirm});
+   
+     await UserModel.create(user);
+     res.status(201).send({message: "User wurde erstellt"});
+    } catch(error){
+        res.status(500).send({message: "Error beim Erstellen des Benutzers"});
+
     }
+ })
+
+
+app.listen(Port, () => {
+    console.log("Running backend");
 })
+

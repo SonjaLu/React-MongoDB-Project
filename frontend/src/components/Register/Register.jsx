@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
+import axios from 'axios'
+import { v4 as uuidv4 } from 'uuid';
 
 function Register() {
   const navigate = useNavigate();
@@ -11,10 +13,50 @@ function Register() {
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
 
-  const handleSubmit = (e) => {
+  const [equal, setEqual] = useState(false);
+
+  //sergej@2023-11-12 - Ref aus dem Video eingefügt.
+  const formRef = useRef();
+
+  const checkPassword = () => {
+    const form = formRef.current;
+    form.password.value === form.passwordRepeat.value ? setEqual(true)
+    : setEqual (false);
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault(); 
     // Registrierungslogik
-  };
+    //sergej@2023-11-12 - registerlogik aus dem Video von Saqib
+    console.log(formRef.current.firstName.value);
+
+    const form = formRef.current;
+    const formData = {
+      id : uuidv4(),
+      firstName: form.firstName.value,
+      lastName: form.lastName.value,
+      email: form.email.value,
+      username : form.username.value,
+      password: form.password.value,
+      passwordRepeat: form.passwordRepeat.value
+    }
+
+    const config = {
+      url: "http://localhost:8081/register",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: JSON.stringify(formData)
+    }
+
+    
+      const resp = await axios (config);
+      console.log(resp);
+
+      //navigiere zu login
+      //navigator ("/login")
+  }
   const onCloseRegister = () => {
     navigate('/');
   };
@@ -24,7 +66,7 @@ function Register() {
       <h1 id="headline">GOURMET EXPLORER</h1>
       <div className="showbox2">
         <h2 id="registerheadline">Register</h2>
-        <form onSubmit={handleSubmit}>
+        <form ref ={formRef} onSubmit={handleSubmit}>
           <div className="inputs-wrapper">
             <div className="input-group">
               <label htmlFor="firstName">Firstname:</label>
