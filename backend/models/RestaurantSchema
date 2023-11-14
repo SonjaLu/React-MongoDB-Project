@@ -5,9 +5,13 @@ const restaurantSchema = new mongoose.Schema({
   category: String,
   location: String,
   state: String,
+  //typ für foto nachgucken.
   pic: String,
   reviews: Number,
-  starRating: String 
+  starRating: String,
+
+  //text der bewertung - kommentar.
+  description: String
 });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);

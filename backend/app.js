@@ -194,7 +194,9 @@ app.post("/deleteReview/:id", async (req, res) => {
 /**
  *sergej@2023-11-10 
  => Route um die Posts zu bekommen / zu senden.
+ => nicht notwendig da wir schon reviews haben. add und get.
  */
+/** 
  app.get("/posts", (req, res) => {
 
  });
@@ -202,6 +204,7 @@ app.post("/deleteReview/:id", async (req, res) => {
  app.post("/posts",(req,res) => {
  
  })
+ */
  
  const storage = multer.diskStorage({
      destination: function (req,res, cb) {
