@@ -36,6 +36,7 @@ textarea {
 /* CSS für neue Bewertungen. */
 .rating {
   font-size: 24px;
+  direction: rtl;
 }
 
 .rating input {

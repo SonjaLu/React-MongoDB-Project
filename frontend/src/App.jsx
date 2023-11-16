@@ -69,6 +69,8 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Reviews from './components/Reviews/Reviews';
 import Welcome from './components/Welcome/Welcome';
+import NewReview from './components/NewReview/NewReview';
+import ForgotPassword from './components/Login/ForgotPassword';
 
 function App() {
   return (
@@ -79,6 +81,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/newreview" element={<NewReview />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </div>
     </Router>

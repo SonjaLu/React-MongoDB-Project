@@ -19,7 +19,7 @@ const useRestaurantReviews = () => {
 
   const showAllReviews = () => {
     console.log('showAllReviews called');
-    fetch('http://localhost:8080/api/restaurants')
+    fetch('http://localhost:8081/api/restaurants')
       .then(response => {
         console.log('Response received');
         return response.json();

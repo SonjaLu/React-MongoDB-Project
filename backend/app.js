@@ -254,3 +254,25 @@ app.listen(Port, () => {
     console.log("Running backend");
 })
 
+app.post("/login", async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        const user = await UserModel.findOne({ username });
+        if (!user) {
+            return res.status(404).send({ message: "user not found" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.hashedPassword);
+        if (!isMatch) {
+            return res.status(401).send({ message: "invalid password" });
+        }
+
+        // Authentifizierung erfolgreich
+        res.status(200).send({ message: "Login succesful", user });
+    } catch (error) {
+        res.status(500).send({ message: "Servererrornpm run dev
+        " });
+    }
+});
+

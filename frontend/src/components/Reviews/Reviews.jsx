@@ -1,6 +1,6 @@
 import React from 'react';
-import useRestaurantReviews from './useRestaurantReviews'; // Pfad anpassen
-import RestaurantList from './RestaurantMinicard.jsx'; // Importieren Sie RestaurantList
+import useRestaurantReviews from './useRestaurantReviews'; 
+import RestaurantList from './RestaurantMinicard.jsx'; 
 
 function Reviews() {
   const { showRestaurants, restaurants, showAllReviews } = useRestaurantReviews();
