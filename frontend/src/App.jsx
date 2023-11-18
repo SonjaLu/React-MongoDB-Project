@@ -74,6 +74,8 @@ import ForgotPassword from './components/Login/ForgotPassword';
 
 function App() {
   return (
+    <NewReview />
+    /*
     <Router>
       <div className="App">
         <Routes>
@@ -87,6 +89,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    */
   );
 }
 
