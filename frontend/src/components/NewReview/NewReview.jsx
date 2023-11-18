@@ -1,7 +1,8 @@
-import './new_review.css'
 import React, { useRef,useState } from 'react';
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
+import './new_review.css'
 
 /**
  * sergej@2023-11-04 
@@ -25,6 +26,7 @@ const  NewReview = () =>{
 
     //sergej@2023-11-12 - Ref aus dem Video eingefügt.
     const formRef = useRef();
+    const navigate = useNavigate();
 
 
 
@@ -34,7 +36,7 @@ const  NewReview = () =>{
         //sergej@2023-11-12 - registerlogik aus dem Video von Saqib
         console.log(" reviewtext: " + formRef.current.review.value);
     
-        
+        navigate('/reviews'); 
         const form = formRef.current;
         const formData = {
           id : uuidv4(),
@@ -60,7 +62,7 @@ const  NewReview = () =>{
     
         const resp = await axios (config);
         console.log(resp);
-        
+     
     };
 
     //TODO: Kategory, Restaurantname etc in html einfügen unten.
@@ -98,7 +100,7 @@ const  NewReview = () =>{
                 
                 onChange={e => setDescription(e.target.value)}></textarea>
                 <input type="submit" className="submit" value="Bewertung abschicken" />
-
+                
             </form>
       </div>
     )
