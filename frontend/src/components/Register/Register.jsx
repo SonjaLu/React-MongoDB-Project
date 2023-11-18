@@ -68,7 +68,7 @@ function Register() {
       <div className="showbox2">
         <h2 id="registerheadline">Register</h2>
         <form ref ={formRef} onSubmit={handleSubmit}>
-          <div className="inputs-wrapper">
+          <div className="input-wrapper">
             <div className="input-group">
               <label htmlFor="firstName">Firstname:</label>
               <input
