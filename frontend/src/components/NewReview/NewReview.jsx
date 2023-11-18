@@ -49,11 +49,11 @@ const NewReview = () => {
     formData.append("category", category);
     formData.append("location", form.location.value);
     formData.append("state", form.state.value);
-    formData.append("pic", "test");
+    formData.append("pic", form.image.files[0]);
     formData.append("reviews", "80");
     formData.append("starRating", starRating);
     formData.append("description", form.review.value);
-  
+
     /*
     sergej@2023-11-18 - Auskommentiert da FormData verwendet wird.
     es geht auch mit Objekt wie unten 
@@ -75,11 +75,14 @@ const NewReview = () => {
     console.log(formData);
 
 
+    try{
     const config = {
       url: "http://localhost:8081/addReview",
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        //"Content-Type": "application/json"
+        "Content-Type": "multipart/form-data"
+
       },
       //data: JSON.stringify(formData)
       data: formData
@@ -87,7 +90,9 @@ const NewReview = () => {
 
     const resp = await axios(config);
     console.log("### " + resp);
-
+   } catch (error){
+    console.error(error);
+   }
   };
 
   //TODO: Kategory, Restaurantname etc in html einfügen unten.
@@ -107,9 +112,9 @@ const NewReview = () => {
           required value={name} onChange={e => setName(e.target.value)} />
 
         <label htmlFor="category">Kategorie auswählen:</label>
-        <select id="category" name="category" 
-        value={category}
-        onChange={handleCategoryChange}>
+        <select id="category" name="category"
+          value={category}
+          onChange={handleCategoryChange}>
           <option value="italian">Italienischer Restaurant</option>
           <option value="american">Amerikanischer Restaurant</option>
           <option value="chinese">Chinesisches Restaurant</option>
@@ -122,41 +127,49 @@ const NewReview = () => {
           required value={location} onChange={e => setLocation(e.target.value)} />
 
 
-<       label htmlFor="state">Staat:</label>
+        <label htmlFor="state">Staat:</label>
         <input type="text" className="state" name="state"
           required value={state} onChange={e => setState(e.target.value)} />
 
+        <div>
+          <input
+            className="image"
+            type="file"
+            accept="image/*"
+            name="image" />
+          <button>Fotos hochladen</button>
+        </div>
 
         <label>Bewertung:</label>
         <div className="rating">
-          <input type="radio" className="star5" name="rating" 
-          value="5" 
-          checked={starRating === '5'}
-          onChange={handleRatingChange}/>
+          <input type="radio" className="star5" name="rating"
+            value="5"
+            checked={starRating === '5'}
+            onChange={handleRatingChange} />
           <label htmlFor="star5"></label>
 
           <input type="radio" className="star4" name="rating"
-            value="4" 
+            value="4"
             checked={starRating === '4'}
-            onChange={handleRatingChange}/>
+            onChange={handleRatingChange} />
           <label htmlFor="star4"></label>
 
-          <input type="radio" className="star3" name="rating" 
-          value="3" 
-          checked={starRating === '3'}
-          onChange={handleRatingChange}/>
+          <input type="radio" className="star3" name="rating"
+            value="3"
+            checked={starRating === '3'}
+            onChange={handleRatingChange} />
           <label htmlFor="star3"></label>
 
-          <input type="radio" className="star2" name="rating" 
-          value="2" 
-          checked={starRating === '2'}
-          onChange={handleRatingChange}/>
+          <input type="radio" className="star2" name="rating"
+            value="2"
+            checked={starRating === '2'}
+            onChange={handleRatingChange} />
           <label htmlFor="star2"></label>
 
-          <input type="radio" className="star1" name="rating" 
-          value="1" 
-          checked={starRating === '1'}
-          onChange={handleRatingChange}/>
+          <input type="radio" className="star1" name="rating"
+            value="1"
+            checked={starRating === '1'}
+            onChange={handleRatingChange} />
           <label htmlFor="star1"></label>
         </div>
 
