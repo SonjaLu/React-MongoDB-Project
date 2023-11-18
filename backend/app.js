@@ -58,17 +58,28 @@ app.use((req, res, next) => {
 app.use ('/uploads', express.static ('uploads'))
 app.use(cors());
 
+//sergej@2023-11-18 - eingfügt da es sonst nicht funktioniert. Sollte hier sein.
+app.use(express.json());
+
+
 /**
  * sergej@2023-10-30 - erstelle Schema für die Daten der DB.
  * Alte Parameter erstmal auskommenitert. 
  * TODO: Parameter werden später eingefügt.
+ * 
+ * sergej@2023-11-18 - Werte von dem Objekt von Sonja eingefügt.
  */
 const reviewSchema = new mongoose.Schema({
 
-    // text: String,
-    // category: String,
-    // id: String,
-    // done: String
+    id: String,
+    name: String,
+    category: String,
+    location: String,
+    state: String,
+    pic: String,
+    reviews: String,
+    starRating: String,
+    description: String
 })
 
 /**
@@ -164,8 +175,10 @@ app.get("/reviews", async (req, res) => {
  */
 app.post("/addReview", async (req, res) => {
 
+    console.log(req.body);
+    const {id, name, category, location, state, pic, reviews, starRating, description} = req.body;
+    const reviewToAdd = new ReviewModel({id, name, category, location, state, pic, reviews, starRating, description});
     try {
-        const reviewToAdd = req.body;
         const addedReview = await ReviewModel.create(reviewToAdd);
 
         res.status(201).send({ "message": "added new Review" });
@@ -220,7 +233,6 @@ app.post("/deleteReview/:id", async (req, res) => {
   * sergej@2023-11-12
   */
  //route für Register.
- app.use(express.json());
  app.post("/register", limiter, async (req,res) => {
      console.log(req.body);
 
@@ -271,8 +283,7 @@ app.post("/login", async (req, res) => {
         // Authentifizierung erfolgreich
         res.status(200).send({ message: "Login succesful", user });
     } catch (error) {
-        res.status(500).send({ message: "Servererrornpm run dev
-        " });
+        res.status(500).send({ message: "Servererrornpm run dev" });
     }
 });
 
