@@ -82,7 +82,7 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">Username:</label>
-            <input
+            <input className="username"
               type="text"
               id="username"
               name="username"
@@ -93,7 +93,7 @@ function Login() {
           </div>
           <div>
             <label htmlFor="password">Password:</label>
-            <input
+            <input className="password"
               type="password"
               id="password"
               name="password"
@@ -102,7 +102,7 @@ function Login() {
               onChange={e => setPassword(e.target.value)}
             />
           </div>
-          <div className="forgot-password">
+          <div className="forgot-password-link">
             <Link to="/forgotpassword">Forgot Password?</Link> {/* Add this line */}
           </div>
           <button id="submitbtn" type="submit" style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>

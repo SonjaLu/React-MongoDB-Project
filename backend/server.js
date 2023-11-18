@@ -13,7 +13,7 @@ app.use(cors()); // Middleware zur Aktivierung von CORS
 app.use('/assets', express.static(path.join(__dirname, '../frontend/src/assets')));
 
 // Umgebungsvariablen
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 const uri = process.env.MONGO_URI;
 
 // Mongoose-Verbindung

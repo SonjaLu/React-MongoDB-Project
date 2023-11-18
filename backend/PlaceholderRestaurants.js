@@ -8,7 +8,8 @@ const restaurantData = [
         "state": "Berlin",
         "pic": "./src/assets/brick-wall.jpg",
         "reviews": 273,
-        "starRating": "★★★★☆"
+        "starRating": "★★★★☆",
+        "description": "gut buergerliche Küche"
     },
     {
         "name": "Münchner Biergarten",
@@ -17,7 +18,8 @@ const restaurantData = [
         "state": "Bayern",
         "pic": "./src/assets/table.jpg",
         "reviews": 88,
-        "starRating": "★★★★☆"
+        "starRating": "★★★★☆",
+        "description": "große Portionen, hat geshmeckt"
     },
     {
         "name": "Roma",
@@ -26,7 +28,8 @@ const restaurantData = [
         "state": "Niedersachsen",
         "pic": "./src/assets/eat.jpg",
         "reviews": 474,
-        "starRating": "★★★★☆"
+        "starRating": "★★★★☆",
+        "description": "gutes Essen, nettes Personal"
     },
     {
         "name": "Tapas Barcelona",
@@ -35,7 +38,8 @@ const restaurantData = [
         "state": "Hamburg",
         "pic": "./src/assets/red-wine.jpg",
         "reviews": 116,
-        "starRating": "★★★★★"
+        "starRating": "★★★★★",
+        "description": "Perfekt"
     },
     {
         "name": "Santos",
@@ -44,7 +48,8 @@ const restaurantData = [
         "state": "Nordrhein-Westfalen",
         "pic": "./src/assets/urban.jpg",
         "reviews": 85,
-        "starRating": "★★★★★"
+        "starRating": "★★★★★",
+        "description": "sehr gut gegessen, tolles Ambiente"
     },
     {
         "name": "Sushi Samurai",
@@ -53,7 +58,8 @@ const restaurantData = [
         "state": "Nordrhein-Westfalen",
         "pic": "./src/assets/sushi.jpg",
         "reviews": 112,
-        "starRating": "★★★☆☆"
+        "starRating": "★★★☆☆",
+        "description": "na ja, schon besser gegessen"
     },
     {
         "name": "Dragon Noodles",
@@ -62,7 +68,8 @@ const restaurantData = [
         "state": "Hessen",
         "pic": "./src/assets/dragon.jpg",
         "reviews": 87,
-        "starRating": "★★★★☆"
+        "starRating": "★★★★☆",
+        "description": "gutes Preis-Leistungsverhältnis"
     },
     {
         "name": "Balkan Grill",
@@ -71,7 +78,8 @@ const restaurantData = [
         "state": "Baden-Württemberg",
         "pic": "./src/assets/balkan.jpg",
         "reviews": 127,
-        "starRating": "★★★★☆"
+        "starRating": "★★★★☆",
+        "description": "alles Bestens"
     },
     {
         "name": "Adriatic Seafood",
@@ -80,7 +88,8 @@ const restaurantData = [
         "state": "Sachsen",
         "pic": "./src/assets/seafood.jpg",
         "reviews": 67,
-        "starRating": "★☆☆☆☆"
+        "starRating": "★☆☆☆☆",
+        "description": "geht gar nicht"
     },
     {
         "name": "Global Tastes",
@@ -89,7 +98,8 @@ const restaurantData = [
         "state": "Bayern",
         "pic": "./src/assets/vegan.jpg",
         "reviews": 140,
-        "starRating": "★★★★★"
+        "starRating": "★★★★★",
+        "description": "mega Essen", 
     },
     {
         "name": "Fusion Delights",
@@ -98,11 +108,12 @@ const restaurantData = [
         "state": "Bremen",
         "pic": "./src/assets/barista.jpg",
         "reviews": 162,
-        "starRating": "★☆☆☆☆"
+        "starRating": "★☆☆☆☆",
+        "description": "nicht zu empfehlen"
     }
   ];
 
-  fetch('http://localhost:8080/restaurants', {
+  fetch('http://localhost:8081/restaurants', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -112,3 +123,5 @@ const restaurantData = [
 .then(response => response.json())
 .then(data => console.log(data))
 .catch(error => console.error('Error:', error));
+
+module.exports = restaurantData;

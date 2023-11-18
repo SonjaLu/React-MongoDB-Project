@@ -84,7 +84,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/newreview" element={<NewReview />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          {/* <Route path="/restaurantminicard" element={<RestaurantMinicard />} /> */}
         </Routes>
       </div>
     </Router>
