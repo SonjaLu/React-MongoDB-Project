@@ -12,17 +12,17 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 15%;
+    top: 10%;
     text-shadow: 2px 2px 4px #000000;
     margin-bottom: 30px;
 }
 
-#username, #password {
+.username, .password {
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 2px;
     margin-bottom: 20px;
-    padding: 0;
+    padding: 0 !important;
     text-align: center;
     font-family: 'Lobster', sans-serif;
     color: white;
@@ -31,6 +31,13 @@
     justify-content: center;
     align-items: center;
     top: 40%;
+    height: 30px !important;
+    padding-left: 10px;
+}
+
+.forgot-password-link {
+    text-align: right;
+    margin-bottom: 50px;
 }
 
 
