@@ -102,7 +102,8 @@ function Login() {
               onChange={e => setPassword(e.target.value)}
             />
           </div>
-          <div className="forgot-password-link">
+          <div className="
+          ">
             <Link to="/forgotpassword">Forgot Password?</Link> {/* Add this line */}
           </div>
           <button id="submitbtn" type="submit" style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>

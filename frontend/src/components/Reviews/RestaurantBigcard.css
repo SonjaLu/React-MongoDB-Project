@@ -1,0 +1,14 @@
+.res-big-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.respic{
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

@@ -1,7 +1,9 @@
+
+import React, { useRef,useState } from 'react';
 import './new_review.css'
-import React, { useRef, useState } from 'react';
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * sergej@2023-11-04 
@@ -14,10 +16,9 @@ const NewReview = () => {
   const [category, setCategory] = useState('');
   const [location, setLocation] = useState('');
   const [state, setState] = useState('');
-  //TODO: Wegen typ für fotos nachgucken.
   const [pic, setPic] = useState('');
 
-  //TODO: MEthode zum aufaddieren der bewertungen
+  //TODO: Methode zum aufaddieren der bewertungen
   const [reviews, setReviews] = useState(0);
   const [starRating, setStarRating] = useState('');
   const [description, setDescription] = useState('');
@@ -25,7 +26,7 @@ const NewReview = () => {
 
   //sergej@2023-11-12 - Ref aus dem Video eingefügt.
   const formRef = useRef();
-
+  const navigate = useNavigate();
 
   const handleRatingChange = (event) => {
     setStarRating(event.target.value);
@@ -39,7 +40,8 @@ const NewReview = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(" reviewtext: " + formRef.current.review.value);
-
+    
+    navigate('/reviews'); 
 
     const form = formRef.current;
 
@@ -54,24 +56,6 @@ const NewReview = () => {
     formData.append("starRating", starRating);
     formData.append("description", form.review.value);
 
-    /*
-    sergej@2023-11-18 - Auskommentiert da FormData verwendet wird.
-    es geht auch mit Objekt wie unten 
-
-    const formData = {
-
-      id: uuidv4(),
-
-      name: form.name.value,
-      category: category,
-      location: form.location.value,
-      state: form.state.value,
-      pic: "/einfach test",
-      reviews: 80,
-      starRating: starRating,
-      description: form.review.value
-    }
-    */
     console.log(formData);
 
 
@@ -80,11 +64,8 @@ const NewReview = () => {
       url: "http://localhost:8081/addReview",
       method: "POST",
       headers: {
-        //"Content-Type": "application/json"
         "Content-Type": "multipart/form-data"
-
       },
-      //data: JSON.stringify(formData)
       data: formData
     }
 
@@ -95,7 +76,6 @@ const NewReview = () => {
    }
   };
 
-  //TODO: Kategory, Restaurantname etc in html einfügen unten.
   return (
     <div className="restaurant-form">
       <h1>Neue Restaurant Bewertung erstellen</h1>
