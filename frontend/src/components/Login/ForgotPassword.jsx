@@ -11,13 +11,14 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Replace with your backend API endpoint for password reset
+     
       const response = await axios.post('http://localhost:8081/forgotpassword', { email });
-      setMessage('Instructions for resetting your password have been sent to your email.');
+      setMessage("If an account with that email exists, instructions for resetting your password have been sent.");
     } catch (error) {
       console.error('Error sending password reset email:', error);
-      setMessage('Failed to send password reset email.');
-    }
+      
+      setMessage('If an account with that email exists, instructions for resetting your password have been sent.');
+    } 
   };
 
   return (

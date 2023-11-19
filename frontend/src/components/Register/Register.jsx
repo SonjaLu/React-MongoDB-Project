@@ -4,6 +4,7 @@ import './Register.css';
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
 
+
 function Register() {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
@@ -14,9 +15,28 @@ function Register() {
   const [passwordRepeat, setPasswordRepeat] = useState('');
 
   const [equal, setEqual] = useState(false);
-
     //sergej@2023-11-12 - Ref aus dem Video eingefügt.
     const formRef = useRef();
+
+    // TODO: check was besser
+    // const form = formRef.current;
+    // if (form.password.value !== form.passwordRepeat.value) {
+    //     setEqual(false);
+    //     // Hier können Sie eine Fehlermeldung anzeigen oder eine Benachrichtigung hinzufügen
+    //     alert("Passwörter stimmen nicht überein!");
+    //     return; // Beenden der Funktion, wenn die Passwörter nicht übereinstimmen
+    // }
+
+    // // Wenn die Passwörter übereinstimmen, fahren Sie fort
+    // setEqual(true);
+    // const formData = {
+    //     id: uuidv4(),
+    //     firstName: form.firstName.value,
+    //     lastName: form.lastName.value,
+    //     email: form.email.value,
+    //     username: form.username.value,
+    //     password: form.password.value
+    // }
 
     const checkPassword = () => {
       const form = formRef.current;
@@ -38,7 +58,7 @@ function Register() {
         email: form.email.value,
         username : form.username.value,
         password: form.password.value,
-        passwordRepeat: form.passwordRepeat.value
+       
       }
   
       const config = {
@@ -49,13 +69,18 @@ function Register() {
         },
         data: JSON.stringify(formData)
       }
+
+        try {
+          const resp = await axios(config);
+          console.log(resp);
+          //navigiere zu login
+          // navigate('/login');
+      } catch (error) {
+          // Fehlerbehandlung
+          console.error('Registrierungsfehler:', error);
+      }
   
-      
-        const resp = await axios (config);
-        console.log(resp);
-  
-        //navigiere zu login
-        //navigator ("/login")
+     
   };
 
   const onCloseRegister = () => {
