@@ -57,7 +57,7 @@ function Login() {
 
       const resp = await axios(config);
 
-      if (resp.data.success) {
+      if (resp.status === 200) {
         // Erfolgreiche Authentifizierung
         navigate('/NewReview');
       } else {
@@ -104,7 +104,7 @@ function Login() {
           </div>
           <div className="
           ">
-            <Link to="/forgotpassword">Forgot Password?</Link> {/* Add this line */}
+            <Link to="/forgotpassword">Forgot Password?</Link> 
           </div>
           <button id="submitbtn" type="submit" style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
             Submit

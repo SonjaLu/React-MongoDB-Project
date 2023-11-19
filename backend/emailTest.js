@@ -1,22 +1,32 @@
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
-async function sendResetEmail(userEmail, resetToken) {
+async function sendTestEmail() {
     let transporter = nodemailer.createTransport({
-        service: 'Gmail',
+        // service: 'gmail',
+        host: 'smtp.web.de',
+        port: 587,
+        secure: false, // true für 465, false für andere Ports
+    
         auth: {
             user: 'solu1122@web.de',
             pass: 'Hv9z:7Ld'
             // user: process.env.EMAIL_USER, // Umgebungsvariable für E-Mail-Adresse
             // pass: process.env.EMAIL_PASS
+        },
+        tls: {
+            rejectUnauthorized: false
         }
     });
 
+
+
     let mailOptions = {
         from: `"Gourmet Explorer"<solu1122@web.de>`, // Absenderadresse
-        to: userEmail, // Empfängeradresse
-        subject: 'Password Reset', // Betreffzeile
-        text: `You requested a password reset. Please use the following link to set a new password: http://localhost:5173/login/resetpassword/${resetToken}`, // plaintext body
-        html: `<b>You requested a password reset. Please use the following link to set a new password:</b> <a href="http://localhost:5173/login/resetpassword/${resetToken}">Reset Password</a>` // HTML body
+        to: 's_lueg@yahoo.com', // Empfängeradresse
+        subject: 'Test Email von Nodemailer', // Betreffzeile
+        text: 'Das ist eine Test-E-Mail von Nodemailer.', // Plaintext body
+        html: '<b>Das ist eine Test-E-Mail von Nodemailer.</b>' // HTML body
     };
 
     try {
@@ -27,4 +37,4 @@ async function sendResetEmail(userEmail, resetToken) {
     }
 }
 
-module.exports = { sendResetEmail };
+sendTestEmail();

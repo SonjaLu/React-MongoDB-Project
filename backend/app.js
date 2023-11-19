@@ -384,7 +384,7 @@ app.post("/forgotpassword", async (req, res) => {
 
             await user.save();
             // Senden einer E-Mail mit dem Token
-            sendResetEmail(email, resetToken); // Implementieren Sie diese Funktion
+            sendResetEmail(email, resetToken); 
         }
         res.status(200).send({ message: "If an account with that email exists, instructions for resetting your password have been sent." });
     } catch (error) {
@@ -392,6 +392,32 @@ app.post("/forgotpassword", async (req, res) => {
         res.status(500).send({ message: "Internal Server Error" });
     }
 });
+
+// Beispiel in Ihrem Node.js-Server (z.B. in app.js)
+app.post('/resetpassword', async (req, res) => {
+    try {
+        const { token, newPassword } = req.body;
+        const user = await UserModel.findOne({ passwordResetToken: token, tokenExpiry: { $gt: Date.now() } });
+
+        if (!user) {
+            return res.status(400).send('Token is invalid or has expired');
+        }
+
+        // Hashing des neuen Passworts
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        user.passwordResetToken = undefined;
+        user.tokenExpiry = undefined;
+
+        await user.save();
+
+        res.send('Password has been reset successfully');
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
 // Serverstart
 app.listen(PORT, () => {
     console.log(`Server läuft auf http://localhost:${PORT}`);
