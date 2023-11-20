@@ -198,6 +198,7 @@ input {
   letter-spacing: 1px;
   text-decoration: none;
   padding-left: 10px !important;
+  cursor: pointer;
   
 }
 

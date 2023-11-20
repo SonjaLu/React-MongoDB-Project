@@ -9,7 +9,16 @@ const restaurantData = [
         "pic": "./src/assets/brick-wall.jpg",
         "reviews": 273,
         "starRating": "★★★★☆",
-        "description": "gut buergerliche Küche"
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "ausgezeichnete schnitzel, gemütliche Atmosphäre",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Münchner Biergarten",
@@ -19,7 +28,16 @@ const restaurantData = [
         "pic": "./src/assets/table.jpg",
         "reviews": 88,
         "starRating": "★★★★☆",
-        "description": "große Portionen, hat geshmeckt"
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "lecker Bier",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Roma",
@@ -29,7 +47,16 @@ const restaurantData = [
         "pic": "./src/assets/eat.jpg",
         "reviews": 474,
         "starRating": "★★★★☆",
-        "description": "gutes Essen, nettes Personal"
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "ausgezeichnete Pasta, gemütliche Atmosphäre",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Tapas Barcelona",
@@ -39,7 +66,16 @@ const restaurantData = [
         "pic": "./src/assets/red-wine.jpg",
         "reviews": 116,
         "starRating": "★★★★★",
-        "description": "Perfekt"
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "fantastico",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Santos",
@@ -49,7 +85,16 @@ const restaurantData = [
         "pic": "./src/assets/urban.jpg",
         "reviews": 85,
         "starRating": "★★★★★",
-        "description": "sehr gut gegessen, tolles Ambiente"
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "sehr zu empfehlen",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Sushi Samurai",
@@ -59,7 +104,16 @@ const restaurantData = [
         "pic": "./src/assets/sushi.jpg",
         "reviews": 112,
         "starRating": "★★★☆☆",
-        "description": "na ja, schon besser gegessen"
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "Top Sushi",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Dragon Noodles",
@@ -69,7 +123,16 @@ const restaurantData = [
         "pic": "./src/assets/dragon.jpg",
         "reviews": 87,
         "starRating": "★★★★☆",
-        "description": "gutes Preis-Leistungsverhältnis"
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "gutes Chop",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Balkan Grill",
@@ -79,7 +142,16 @@ const restaurantData = [
         "pic": "./src/assets/balkan.jpg",
         "reviews": 127,
         "starRating": "★★★★☆",
-        "description": "alles Bestens"
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "Fleisch perfekt gegrillt",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Adriatic Seafood",
@@ -89,7 +161,16 @@ const restaurantData = [
         "pic": "./src/assets/seafood.jpg",
         "reviews": 67,
         "starRating": "★☆☆☆☆",
-        "description": "geht gar nicht"
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "geht gar nicht",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Global Tastes",
@@ -99,7 +180,16 @@ const restaurantData = [
         "pic": "./src/assets/vegan.jpg",
         "reviews": 140,
         "starRating": "★★★★★",
-        "description": "mega Essen", 
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "super",
+              "username": "Maria234"
+            }
+            ]
     },
     {
         "name": "Fusion Delights",
@@ -109,8 +199,16 @@ const restaurantData = [
         "pic": "./src/assets/barista.jpg",
         "reviews": 162,
         "starRating": "★☆☆☆☆",
-        "description": "nicht zu empfehlen"
-    }
+        "descriptions": [
+            {
+              "description": "gutes Essen, nettes Personal",
+              "username": "Theo1"
+            },
+            {
+              "description": "nie wieder",
+              "username": "Maria234"
+            }
+            ]}
   ];
 
   fetch('http://localhost:8081/restaurants', {

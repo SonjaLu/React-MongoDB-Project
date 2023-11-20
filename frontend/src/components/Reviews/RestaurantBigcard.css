@@ -12,3 +12,27 @@
     border-radius: 5px;
     margin-bottom: 10px;
 }
+
+.createbtn2 {
+    background-color: #89D1D6;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin-top: 20px;
+    border: 2px solid white !important;
+    font-weight: bold;
+  }
+
+  .longbtn {
+    cursor: pointer;
+    background-color: #89D1D6;
+    border: 1px solid white;
+    border-radius: 5px;
+  }
