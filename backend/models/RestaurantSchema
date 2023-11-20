@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
 
+// Schema für einzelne Bewertungen
+const reviewSchema = new mongoose.Schema({
+  description: String,
+  username: String
+});
+
+// Haupt-Schema für Restaurants
 const restaurantSchema = new mongoose.Schema({
 
   id: String,
@@ -7,12 +14,13 @@ const restaurantSchema = new mongoose.Schema({
   category: String,
   location: String,
   state: String,
-  pic: String,
-  reviews: String,
+  pic: String, // Pfad zum Bild oder URL
+  reviews: Number,
   starRating: String,
-  description: String
+  descriptions: [reviewSchema] // Verwendung des Review-Schemas für Bewertungen
 });
 
+// Modell erstellen
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
 module.exports = Restaurant;
