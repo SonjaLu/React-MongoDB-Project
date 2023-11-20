@@ -31,7 +31,7 @@ function Welcome() {
         <div id="navbar">
           <Link to="/login">Login</Link>
           <Link to="/register">Register</Link>
-          <Link to="/newreview">Reviews</Link>
+          {/* <Link to="/newreview">Reviews</Link> */}
           
         </div>
       </div>

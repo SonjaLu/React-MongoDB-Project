@@ -71,7 +71,7 @@ import Reviews from './components/Reviews/Reviews';
 import Welcome from './components/Welcome/Welcome';
 import NewReview from './components/NewReview/NewReview';
 import ForgotPassword from './components/Login/ForgotPassword';
-import ResetPassword from './components/Login/ResetPassword';
+import ResetPage from './components/Login/ResetPassword';
 
 function App() {
   return (
@@ -86,7 +86,7 @@ function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/newreview" element={<NewReview />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/login/resetpassword/:token" component={ResetPassword} />
+          <Route path="/login/resetpassword/" element={<ResetPage />} />
          
         </Routes>
       </div>

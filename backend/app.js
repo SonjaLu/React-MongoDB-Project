@@ -216,7 +216,7 @@ const UserModel = require('./models/UserSchema')
 const app = express();
 const PORT = process.env.PORT || 8081;
 const crypto = require('crypto');
-const { sendResetEmail } = require('./PasswordResetMail');
+
 
 // CORS-Konfiguration
 app.use(cors({
@@ -370,51 +370,72 @@ app.post("/deleteReview/:id", async (req, res) => {
    }
 })
 
-app.post("/forgotpassword", async (req, res) => {
-    try {
-        const { email } = req.body;
-        const user = await UserModel.findOne({ email });
+// app.post("/forgotpassword", async (req, res) => {
+//     try {
+//         const { email } = req.body;
+//         const user = await UserModel.findOne({ email });
 
-        if (user) {
-            const resetToken = generateResetToken(); 
-            const expiryDate = new Date();
-            expiryDate.setHours(expiryDate.getHours() + 1); 
-            user.passwordResetToken = resetToken;
-            user.tokenExpiry = expiryDate;
+//         if (user) {
+//             const resetToken = generateResetToken(); 
+//             const expiryDate = new Date();
+//             expiryDate.setHours(expiryDate.getHours() + 1); 
+//             user.passwordResetToken = resetToken;
+//             user.tokenExpiry = expiryDate;
 
-            await user.save();
-            // Senden einer E-Mail mit dem Token
-            sendResetEmail(email, resetToken); 
-        }
-        res.status(200).send({ message: "If an account with that email exists, instructions for resetting your password have been sent." });
-    } catch (error) {
-        console.error("Error in /forgotpassword route:", error);
-        res.status(500).send({ message: "Internal Server Error" });
+//             await user.save();
+//             // Senden einer E-Mail mit dem Token
+//             sendResetEmail(email, resetToken); 
+//         }
+//         res.status(200).send({ message: "If an account with that email exists, instructions for resetting your password have been sent." });
+//     } catch (error) {
+//         console.error("Error in /forgotpassword route:", error);
+//         res.status(500).send({ message: "Internal Server Error" });
+//     }
+// });
+
+// Beispiel-Route für Passwort-Zurücksetzungsanfrage
+app.post('/request-reset', async (req, res) => {
+    const { email } = req.body;
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+        return res.status(400).send('Benutzer nicht gefunden.');
     }
+
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    const expiryDate = new Date();
+    expiryDate.setMinutes(expiryDate.getMinutes() + 5); // 5 Min gültig
+
+    user.passwordResetToken = resetToken;
+    user.tokenExpiry = expiryDate;
+
+    await user.save();
+
+    // Token direkt senden (nicht empfohlen für Produktionsumgebungen)
+    res.json({ resetToken });
 });
 
-// Beispiel in Ihrem Node.js-Server (z.B. in app.js)
-app.post('/resetpassword', async (req, res) => {
-    try {
-        const { token, newPassword } = req.body;
-        const user = await UserModel.findOne({ passwordResetToken: token, tokenExpiry: { $gt: Date.now() } });
+app.post('/reset-password', async (req, res) => {
+    const { email, token, newPassword } = req.body;
 
-        if (!user) {
-            return res.status(400).send('Token is invalid or has expired');
-        }
+    // if (newPassword !== confirmPassword) {
+    //     return res.status(400).send('Passwörter stimmen nicht überein.');
+    // }
+    
+    const user = await UserModel.findOne({ email, passwordResetToken: token, tokenExpiry: { $gte: new Date() } });
 
-        // Hashing des neuen Passworts
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-        user.password = hashedPassword;
-        user.passwordResetToken = undefined;
-        user.tokenExpiry = undefined;
-
-        await user.save();
-
-        res.send('Password has been reset successfully');
-    } catch (error) {
-        res.status(500).send('Internal Server Error');
+    if (!user) {
+        return res.status(400).send('Ungültiger oder abgelaufener Token.');
     }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.hashedPassword = hashedPassword;
+    user.passwordResetToken = undefined; // Token entfernen
+    user.tokenExpiry = undefined; // Ablaufdatum entfernen
+
+    await user.save();
+
+    res.send('Passwort erfolgreich zurückgesetzt.');
 });
 
 
