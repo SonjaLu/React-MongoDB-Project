@@ -13,7 +13,7 @@ const UserModel = require('./models/UserSchema')
 const app = express();
 const PORT = process.env.PORT || 8081;
 const crypto = require('crypto');
-const { sendResetEmail } = require('./PasswordResetMail');
+
 
 // CORS-Konfiguration
 app.use(cors({
@@ -152,35 +152,7 @@ app.post("/register", limiter, async (req,res) => {
    }
 })
 
-app.post("/addReview", async (req, res) => {
-
-    try {
-        const reviewToAdd = req.body;
-        const addedReview = await ReviewModel.create(reviewToAdd);
-
-        res.status(201).send({ "message": "added new Review" });
-    } catch {
-        res.status(500).send({ "message": "could not add Review" });
-    }
-})
-
-// * sergej@2023-10-30 - Bekomme die Reviews aus der DB.
-
-app.get("/reviews", async (req, res) => {
-   try {
-
-       const reviews = await ReviewModel.find({});
-       res.status(200).send({
-           "reviews": reviews,
-           "message": "fetched reviews"
-       });
-   } catch {
-       res.status(500).send({ "message": "could not fetch reviews" });
-   }
-})
-
 //  Route zum Löschen des Bewertungen aus der Datenbank. 
-
 app.post("/deleteReview/:id", async (req, res) => {
 
    try {
@@ -194,28 +166,74 @@ app.post("/deleteReview/:id", async (req, res) => {
 })
 
 
-app.post("/forgotpassword", async (req, res) => {
-    try {
-        const { email } = req.body;
-        const user = await UserModel.findOne({ email });
+// app.post("/forgotpassword", async (req, res) => {
+//     try {
+//         const { email } = req.body;
+//         const user = await UserModel.findOne({ email });
 
-        if (user) {
-            const resetToken = generateResetToken(); 
-            const expiryDate = new Date();
-            expiryDate.setHours(expiryDate.getHours() + 1); 
-            user.passwordResetToken = resetToken;
-            user.tokenExpiry = expiryDate;
+//         if (user) {
+//             const resetToken = generateResetToken(); 
+//             const expiryDate = new Date();
+//             expiryDate.setHours(expiryDate.getHours() + 1); 
+//             user.passwordResetToken = resetToken;
+//             user.tokenExpiry = expiryDate;
 
-            await user.save();
-            // Senden einer E-Mail mit dem Token
-            sendResetEmail(email, resetToken); // Implementieren Sie diese Funktion
-        }
-        res.status(200).send({ message: "If an account with that email exists, instructions for resetting your password have been sent." });
-    } catch (error) {
-        console.error("Error in /forgotpassword route:", error);
-        res.status(500).send({ message: "Internal Server Error" });
+//             await user.save();
+//             // Senden einer E-Mail mit dem Token
+//             sendResetEmail(email, resetToken); 
+//         }
+//         res.status(200).send({ message: "If an account with that email exists, instructions for resetting your password have been sent." });
+//     } catch (error) {
+//         console.error("Error in /forgotpassword route:", error);
+//         res.status(500).send({ message: "Internal Server Error" });
+//     }
+// });
+
+// Beispiel-Route für Passwort-Zurücksetzungsanfrage
+app.post('/request-reset', async (req, res) => {
+    const { email } = req.body;
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+        return res.status(400).send('Benutzer nicht gefunden.');
     }
+
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    const expiryDate = new Date();
+    expiryDate.setMinutes(expiryDate.getMinutes() + 5); // 5 Min gültig
+
+    user.passwordResetToken = resetToken;
+    user.tokenExpiry = expiryDate;
+
+    await user.save();
+
+    // Token direkt senden (nicht empfohlen für Produktionsumgebungen)
+    res.json({ resetToken });
 });
+
+app.post('/reset-password', async (req, res) => {
+    const { email, token, newPassword } = req.body;
+
+    // if (newPassword !== confirmPassword) {
+    //     return res.status(400).send('Passwörter stimmen nicht überein.');
+    // }
+    
+    const user = await UserModel.findOne({ email, passwordResetToken: token, tokenExpiry: { $gte: new Date() } });
+
+    if (!user) {
+        return res.status(400).send('Ungültiger oder abgelaufener Token.');
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.hashedPassword = hashedPassword;
+    user.passwordResetToken = undefined; // Token entfernen
+    user.tokenExpiry = undefined; // Ablaufdatum entfernen
+
+    await user.save();
+
+    res.send('Passwort erfolgreich zurückgesetzt.');
+});
+
 
 
 // //erste route. prüfe ob alles ordentlich funktioniert.

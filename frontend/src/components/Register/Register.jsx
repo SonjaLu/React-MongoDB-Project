@@ -74,7 +74,7 @@ function Register() {
           const resp = await axios(config);
           console.log(resp);
           //navigiere zu login
-          // navigate('/login');
+          navigate('/login');
       } catch (error) {
           // Fehlerbehandlung
           console.error('Registrierungsfehler:', error);
