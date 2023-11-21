@@ -25,18 +25,22 @@ function Login (){
     )
 }
 */
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css'; 
 import '../../App.css';
-import ForgotPassword from './ForgotPassword';
+import { useAuth } from './LoginAuthen';
+// import ForgotPassword from './ForgotPassword';
+
+
 
 function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,6 +63,8 @@ function Login() {
 
       if (resp.status === 200) {
         // Erfolgreiche Authentifizierung
+        console.log("Eingeloggter Benutzername:", username);
+        login(username); 
         navigate('/NewReview');
       } else {
         // Fehlgeschlagene Authentifizierung

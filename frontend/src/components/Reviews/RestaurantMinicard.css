@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    align-items: stretch;
   }
   
   .restaurant-card {
@@ -17,6 +18,11 @@
   .restaurant-card:hover {
     cursor: pointer;
     transform: scale(1.2);
+  }
+
+  .restaurant-name {
+    display: -webkit-box;
+  -webkit-line-clamp: 2; 
   }
   
   .restaurant-card.deutsch {
@@ -82,4 +88,22 @@
     margin-top: 20px;
     font-weight: bold;
   }
+
+  .logoutbtn {
+    background-color: rgb(228, 13, 13);
+    border: 2px solid white !important;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    
+}
   

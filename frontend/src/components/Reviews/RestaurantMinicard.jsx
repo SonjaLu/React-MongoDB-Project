@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Login/LoginAuthen';
 import './RestaurantMinicard.css'; 
 // import RestaurantCard from './RestaurantCard';
 import RestaurantBigcard from './RestaurantBigcard';
@@ -51,6 +52,7 @@ const RestaurantCard = ({ name, pic, starRating, location, category }) => {
 const RestaurantList = ({ restaurants }) => {
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
     const navigate = useNavigate();
+    const { logout } = useAuth(); 
 
     const handleCardClick = (restaurant) => {
         setSelectedRestaurant(restaurant);
@@ -63,7 +65,13 @@ const RestaurantList = ({ restaurants }) => {
     const handleCreateReview = () => {
         navigate('/newreview');
     };
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
     return (
+        <>
         <div>
              <button className="createbtn2" onClick={handleCreateReview} style={{ position: 'absolute', top: '10px', right: '10px' }}>
                 Create new Review
@@ -72,9 +80,9 @@ const RestaurantList = ({ restaurants }) => {
                 <RestaurantBigcard restaurant={selectedRestaurant} onClose={handleClose} />
                
             ) : (
-                <div className="restaurant-list">
+                <div className="restaurant-list ">
                     {restaurants.map((restaurant) => (
-                        <div onClick={() => handleCardClick(restaurant)} key={restaurant.name}>
+                        <div className="restaurant-name" onClick={() => handleCardClick(restaurant)} key={restaurant.name}>
                             <RestaurantCard
                                 name={restaurant.name}
                                 pic={restaurant.pic}
@@ -86,7 +94,11 @@ const RestaurantList = ({ restaurants }) => {
                     ))}
                 </div>
             )}
+             <button className="logoutbtn" onClick={handleLogout} style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
+                Logout
+            </button>
         </div>
+    </>
     );
 };
 export default RestaurantList;

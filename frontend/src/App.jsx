@@ -10,9 +10,11 @@ import Welcome from './components/Welcome/Welcome';
 import NewReview from './components/NewReview/NewReview';
 import ForgotPassword from './components/Login/ForgotPassword';
 import ResetPage from './components/Login/ResetPassword';
+import { AuthProvider } from './components/Login/LoginAuthen';
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <div className="App">
         <Routes>
@@ -27,6 +29,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </AuthProvider>
   );
 }
 

@@ -4,13 +4,16 @@ import './new_review.css'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from '../Login/LoginAuthen';
 /**
  * sergej@2023-11-04 
  * Formular um die neue Bewertungen zu erstellen.
  * @returns 
  */
 const NewReview = () => {
+  const { user } = useAuth();
+  console.log("Benutzer im NewReview-Kontext:", user);
+  const username = user ? user.username : '';
 
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
@@ -40,7 +43,8 @@ const NewReview = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(" reviewtext: " + formRef.current.review.value);
-    
+    formData.append("username", username);
+    console.log("Formulardaten vor dem Senden:", formData);
     navigate('/reviews'); 
 
     const form = formRef.current;
@@ -78,49 +82,51 @@ const NewReview = () => {
 
   return (
     <div className="restaurant-form">
-      <h1>Neue Restaurant Bewertung erstellen</h1>
+      <h2>Create new Restaurant Review</h2>
       <hr />
 
       <div>
-        <label className="username">Benutzername: </label>
+      <label className="username">User: {username}</label>
         <hr />
       </div>
 
       <form ref={formRef} onSubmit={handleSubmit}>
-        <label htmlFor="name">Restaurantname:</label>
+      {/* <input type="hidden" name="username" value={username} /> */}
+        <label htmlFor="name">Restaurant name:</label>
         <input type="text" className="name" name="name"
           required value={name} onChange={e => setName(e.target.value)} />
 
-        <label htmlFor="category">Kategorie auswählen:</label>
+        <label htmlFor="category">Choose Category:</label>
         <select id="category" name="category"
           value={category}
           onChange={handleCategoryChange}>
-          <option value="italian">Italienischer Restaurant</option>
-          <option value="american">Amerikanischer Restaurant</option>
-          <option value="chinese">Chinesisches Restaurant</option>
-          <option value="indian">Indisches Restaurant </option>
-          <option value="japanese">Japanisches Restaurant</option>
+          <option value="italian">Italienisches Restaurant</option>
+          <option value="deutsch">Deutsches Restaurant</option>
+          <option value="asiatisch">Asiatisches Restaurant</option>
+          <option value="balkan">Balkan Restaurant </option>
+          <option value="spanisch">Spanisches Restaurant</option>
+          <option value="sonstige">Sonstiges</option>
         </select>
 
-        <label htmlFor="location">Ort:</label>
+        <label htmlFor="location">Location:</label>
         <input type="text" className="location" name="location"
           required value={location} onChange={e => setLocation(e.target.value)} />
 
 
-        <label htmlFor="state">Staat:</label>
+        <label htmlFor="state">Bundesland:</label>
         <input type="text" className="state" name="state"
           required value={state} onChange={e => setState(e.target.value)} />
 
-        <div>
+        <div className="file-upload">
           <input
             className="image"
             type="file"
             accept="image/*"
-            name="image" />
-          <button>Fotos hochladen</button>
-        </div>
+            name="image"/>
+          <button className="uploadbtn">upload fotos</button>
+        </div><br />
 
-        <label>Bewertung:</label>
+        <label>Star rating:</label>
         <div className="rating">
           <input type="radio" className="star5" name="rating"
             value="5"
@@ -153,11 +159,11 @@ const NewReview = () => {
           <label htmlFor="star1"></label>
         </div>
 
-        <label htmlFor="review">Bewertungstext:</label>
+        <label htmlFor="review">Text Review:</label>
         <textarea className="review" name="review" required value={description}
           onChange={e => setDescription(e.target.value)}></textarea>
 
-        <input type="submit" className="submit" value="Bewertung abschicken" />
+        <input type="submit" className="submit" value="Send Review" />
 
       </form>
     </div>
