@@ -17,7 +17,7 @@
 
   .restaurant-card:hover {
     cursor: pointer;
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 
   .restaurant-name {
@@ -26,8 +26,14 @@
   }
   
   .restaurant-card.deutsch {
-    background-color: #f9e79f; /* Gelbton */
+    background-color: #f9e79f;
+    
   }
+
+  .restaurant-card.deutsch .star-rating span {
+    color: grey;
+  }
+
   
   .restaurant-card.spanisch {
     background-color: #e74c3c; /* Rotton */
@@ -87,6 +93,7 @@
     transition-duration: 0.4s;
     margin-top: 20px;
     font-weight: bold;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
   }
 
   .logoutbtn {
@@ -104,6 +111,7 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
     
 }
   

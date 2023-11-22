@@ -234,7 +234,14 @@ app.post('/reset-password', async (req, res) => {
     res.send('Passwort erfolgreich zurückgesetzt.');
 });
 
-
+const addReview = async (restaurantId, newRating) => {
+    const restaurant = await Restaurant.findById(restaurantId);
+    restaurant.starRating += newRating; // Update der Gesamtbewertung
+    restaurant.reviews += 1; // Erhöhung der Anzahl der Bewertungen
+    restaurant.averageRating = restaurant.starRating / restaurant.reviews; // Neuer Durchschnitt
+    // Speichern des aktualisierten Dokuments
+    await restaurant.save();
+  };
 
 // //erste route. prüfe ob alles ordentlich funktioniert.
 // //wichtig: message: "text" und nicht "mesage" :"text" schreiben.

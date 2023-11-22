@@ -15,8 +15,11 @@ const restaurantSchema = new mongoose.Schema({
   location: String,
   state: String,
   pic: String, // Pfad zum Bild oder URL
-  reviews: Number,
-  starRating: String,
+  // reviews: Number,
+  // starRating: String,
+  starRating: { type: Number, default: 0 }, // Gesamtbewertung
+  reviews: { type: Number, default: 0 }, // Anzahl der Bewertungen
+  averageRating: { type: Number, default: 0 }, // Durchschnittsbewertung
   descriptions: [reviewSchema] // Verwendung des Review-Schemas für Bewertungen
 });
 

@@ -4,15 +4,17 @@ import { useAuth } from '../Login/LoginAuthen';
 import './RestaurantMinicard.css'; 
 // import RestaurantCard from './RestaurantCard';
 import RestaurantBigcard from './RestaurantBigcard';
+import StarRating from '../NewReview/StarRating';
 
-const RestaurantCard = ({ name, pic, starRating, location, category }) => {
+const RestaurantCard = ({ name, pic, starRating, location, category, averageRating }) => {
     const categoryClass = category.replace(/\s+/g, '-').toLowerCase();
     return (
         <div className={`restaurant-card ${categoryClass}`}>
             <img src={pic} alt={name} className="restaurant-image"/>
             <div className="restaurant-info">
                 <h3 className="restaurant-name">{name}</h3>
-                <p className="restaurant-stars">{starRating}</p>
+                <StarRating rating={averageRating} />
+                {/* <p className="restaurant-stars">{averageRating.toFixed(1)} / 5</p> */}
                 <p className="restaurant-location">{location}</p>
             </div>
         </div>
@@ -89,6 +91,7 @@ const RestaurantList = ({ restaurants }) => {
                                 starRating={restaurant.starRating}
                                 location={restaurant.location}
                                 category={restaurant.category}
+                                averageRating={restaurant.averageRating}
                             />
                         </div>
                     ))}
