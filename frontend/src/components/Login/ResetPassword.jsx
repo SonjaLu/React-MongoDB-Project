@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import './ResetPassword.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function ResetPage() {
+
+    console.log("### ResetPage");
+
+
     const navigate = useNavigate();
     const [stage, setStage] = useState(0); // 0: E-Mail, 1: Token, 2: Neues Passwort
     const [email, setEmail] = useState('');
     const [resetToken, setResetToken] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+    const [equal, setEqual] = useState (false);
+    const formRef = useRef ();
+
 
     const handleEmailSubmit = async () => {
         try {
@@ -20,6 +28,17 @@ export default function ResetPage() {
             console.error('Fehler bei der Anfrage des Passwort-Resets:', error);
         }
     };
+
+
+    /**
+     * Prüfe ob Passworter übereinstimmen.
+     * @param {} formRefCurrent 
+     * @param {*} setEqual 
+     */
+    const checkPassword = (formRefCurrent, setEqual) => {
+        formRefCurrent.newPassword.value === formRefCurrent.confirmPassword.value ?
+        setEqual(true): setEqual(false);
+    }
 
 
     const handleNewPasswordSubmit = async () => {
@@ -54,10 +73,12 @@ export default function ResetPage() {
     else if (stage === 1) {
         return (
             <div className="resetcontainer">
+                <form >ref={formRef}
                 <h2>Type in your new password</h2>
                 <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="new password" style={{ marginBottom: '10px' }}/>
-                <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="confirm password" />
+                <input type="password" value={confirmPassword} onChange={() => checkPassword(formRef.current, setEqual)} placeholder="confirm password" />
                 <button className="resetbtn" type="button" onClick={handleNewPasswordSubmit}>Reset Password</button>
+                </form>
             </div>
         );
     }
