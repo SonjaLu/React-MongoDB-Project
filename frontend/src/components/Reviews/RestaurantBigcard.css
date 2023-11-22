@@ -7,8 +7,8 @@
 }
 
 .respic{
-    width: 50%;
-    height: 50%;
+    width: 300px;
+    height: auto;
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -29,12 +29,14 @@
     margin-top: 20px;
     border: 2px solid white !important;
     font-weight: bold;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
   }
 
   .details-container {
     display: flex;
     justify-content: space-between; 
     align-items: flex-start;
+    margin-right: 15px;
 }
 
 .comments-section {
@@ -50,4 +52,5 @@
     position: relative;
     padding: 10px 20px;
     margin-top: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
   }

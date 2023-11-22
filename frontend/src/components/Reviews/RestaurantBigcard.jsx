@@ -1,6 +1,8 @@
 import React from 'react';
 import './RestaurantBigcard.css';
 import { useNavigate } from 'react-router-dom';
+import StarRating from '../NewReview/StarRating';
+// import 'StarRating.css';
 
 const RestaurantBigcard = ({ restaurant, onClose }) => {
     const navigate = useNavigate();
@@ -17,11 +19,13 @@ const RestaurantBigcard = ({ restaurant, onClose }) => {
         <div className="details-container">
             <div className="res-big-card">
                 <h2>{restaurant.name}</h2>
+                <div><StarRating rating={restaurant.averageRating} /></div>
                 <p><b> * {restaurant.category} *</b></p>
                 <img className="respic" src={restaurant.pic} alt={restaurant.name} />
                 <p><b>Location:</b> {restaurant.location}, {restaurant.state}</p>
                 <p><b>Reviews:</b> {restaurant.reviews}</p>
-                <p>{restaurant.starRating}</p>
+                
+            
             </div>
             <div className="comments-section">
                 <p><b>Comments:</b></p>
