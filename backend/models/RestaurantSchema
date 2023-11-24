@@ -20,7 +20,9 @@ const restaurantSchema = new mongoose.Schema({
   // starRating: String,
   
   averageRating: { type: Number, default: 0 }, // Durchschnittsbewertung
-  descriptions: [reviewSchema] // Verwendung des Review-Schemas für Bewertungen
+  totalRating: { type: Number, default: 0 }, // Gesamtbewertung
+  numberOfRatings: { type: Number, default: 0 },
+  descriptions: [reviewSchema] 
 });
 
 // Modell erstellen

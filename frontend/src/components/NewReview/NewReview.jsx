@@ -12,7 +12,7 @@ import { useAuth } from '../Login/LoginAuthen';
  */
 const NewReview = () => {
   const { user } = useAuth();
-  console.log("Benutzer im NewReview-Kontext:", user);
+
   const username = user ? user.username : '';
 
   const [name, setName] = useState('');
@@ -47,6 +47,7 @@ const NewReview = () => {
     //formData.append("username", username);
     //console.log("Formulardaten vor dem Senden:", formData);
     navigate('/reviews'); 
+    const numericStarRating = Number(starRating);
 
     const form = formRef.current;
 
@@ -57,8 +58,8 @@ const NewReview = () => {
     formData.append("location", form.location.value);
     formData.append("state", form.state.value);
     formData.append("pic", form.image.files[0]);
-    formData.append("reviews", "80");
-    formData.append("starRating", starRating);
+    // formData.append("reviews");
+    formData.append("starRating", numericStarRating);
     formData.append("description", form.review.value);
     formData.append("username", username);
 

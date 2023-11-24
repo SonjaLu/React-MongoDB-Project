@@ -6,6 +6,8 @@ import StarRating from '../NewReview/StarRating';
 
 const RestaurantBigcard = ({ restaurant, onClose }) => {
     const navigate = useNavigate();
+    console.log("Restaurant Daten: ", restaurant);
+
 
     const handleCreateReview = () => {
         navigate('/newreview'); 
