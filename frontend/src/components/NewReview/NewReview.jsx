@@ -43,8 +43,8 @@ const NewReview = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(" reviewtext: " + formRef.current.review.value);
-    formData.append("username", username);
-    console.log("Formulardaten vor dem Senden:", formData);
+    
+   
     navigate('/reviews'); 
 
     const form = formRef.current;
@@ -59,6 +59,9 @@ const NewReview = () => {
     formData.append("reviews", "80");
     formData.append("starRating", starRating);
     formData.append("description", form.review.value);
+
+    formData.append("username", username);
+    console.log("Formulardaten vor dem Senden:", formData);
 
     console.log(formData);
 

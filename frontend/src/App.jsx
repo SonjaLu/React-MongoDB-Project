@@ -11,6 +11,7 @@ import NewReview from './components/NewReview/NewReview';
 import ForgotPassword from './components/Login/ForgotPassword';
 import ResetPage from './components/Login/ResetPassword';
 import { AuthProvider } from './components/Login/LoginAuthen';
+import ChangeUser from './components/Register/ChangeUser';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/newreview" element={<NewReview />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/login/resetpassword/" element={<ResetPage />} />
+          <Route path="/changeuser" element={<ChangeUser />} />
          
         </Routes>
       </div>

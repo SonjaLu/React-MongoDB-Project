@@ -234,7 +234,28 @@ app.post('/reset-password', async (req, res) => {
     res.send('Passwort erfolgreich zurückgesetzt.');
 });
 
-
+//==== Benutzer updaten ====
+app.post("/changeuser", limiter, async (req, res) => {
+    console.log(req.body);
+    const { oldusername, firstName, lastName, email, username } = req.body;
+    if (!firstName || !email || !username || !lastName || !oldusername) {
+      return res.status(400).send({ message: "Nicht alle Felder wurden ausgefüllt" });
+    }
+    try {
+      const updatedUser = await UserModel.findOneAndUpdate(
+        { username: oldusername }, // Suche nach der eindeutigen ID
+        { firstName, lastName, email, username }, // Aktualisierte Daten
+        { new: true } // Gibt das aktualisierte Dokument zurück
+      );
+      if (!updatedUser) {
+        return res.status(404).send({ message: "Benutzer ist nicht vorhanden" });
+      }
+      res.status(200).send({ message: "User Profil wurde geändert", user: updatedUser });
+    } catch (error) {
+      console.error('Updatefehler:', error);
+      res.status(500).send({ message: "Error beim Ändern des Benutzers" });
+    }
+  }); 
 
 // //erste route. prüfe ob alles ordentlich funktioniert.
 // //wichtig: message: "text" und nicht "mesage" :"text" schreiben.
