@@ -23,7 +23,7 @@ const RestaurantBigcard = ({ restaurant, onClose }) => {
                 <p><b> * {restaurant.category} *</b></p>
                 <img className="respic" src={restaurant.pic} alt={restaurant.name} />
                 <p><b>Location:</b> {restaurant.location}, {restaurant.state}</p>
-                <p><b>Reviews:</b> {restaurant.reviews}</p>
+                <p><b>Reviews:</b> {restaurant.reviews.length}</p>
                 
             
             </div>
