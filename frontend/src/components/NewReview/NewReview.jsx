@@ -33,6 +33,17 @@ const NewReview = () => {
     "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen", "not sure"
   ];
 
+  const getCategoryClass = () => {
+    switch (category) {
+      case "italienisch": return "italian-style";
+      case "deutsch": return "deutsch-style";
+      case "asiatisch": return "asiatisch-style";
+      case "balkan": return "balkan-style";
+      case "spanisch": return "spanisch-style";
+      case "sonstige": return "sonstige-style";
+      default: return "";
+    }
+  };
   //sergej@2023-11-12 - Ref aus dem Video eingefügt.
   const formRef = useRef();
   const navigate = useNavigate();
@@ -120,9 +131,12 @@ const NewReview = () => {
 
         <label htmlFor="category">Choose Category:</label>
         <select id="category" name="category"
+         className={getCategoryClass(category)} 
           value={category}
-          onChange={handleCategoryChange}>
-          <option value="italian">Italienisches Restaurant</option>
+          onChange={handleCategoryChange}
+          required>
+            <option value="">Please select</option>
+          <option value="italienisch">Italienisches Restaurant</option>
           <option value="deutsch">Deutsches Restaurant</option>
           <option value="asiatisch">Asiatisches Restaurant</option>
           <option value="balkan">Balkan Restaurant </option>
@@ -135,7 +149,7 @@ const NewReview = () => {
           required value={location} onChange={e => setLocation(e.target.value)} />
 
 
-        <label htmlFor="state">Bundesland:</label>
+        <label htmlFor="state">State:</label>
         <select 
         id="state" 
         name="state"
@@ -143,7 +157,7 @@ const NewReview = () => {
         onChange={e => setState(e.target.value)}
         required
       >
-        <option value="">Bitte wählen</option>
+        <option value="">Please select</option>
         {germanStates.map((state, index) => (
           <option key={index} value={state}>{state}</option>
         ))}
