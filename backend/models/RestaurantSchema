@@ -20,7 +20,7 @@ const restaurantSchema = new mongoose.Schema({
   reviews: [{ 
     description: String, 
     username: String, 
-    starRating: Number
+    numericStarRating: Number
 }],
 
   averageRating: { type: Number, default: 0 }, // Durchschnittsbewertung

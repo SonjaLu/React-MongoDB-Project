@@ -87,6 +87,11 @@ const NewReview = () => {
     e.preventDefault();
   
     const form = formRef.current;
+    if (isNaN(starRating) || starRating < 1 || starRating > 5) {
+      console.error("Star Rating is not valid:", starRating);
+      return;
+  }
+
     const formData = new FormData();
     formData.append("id", uuidv4());
     formData.append("name", form.name.value);
@@ -98,7 +103,7 @@ const NewReview = () => {
     if (form.image.files[0]) {
       formData.append("pic", form.image.files[0]);
     }
-    formData.append("numericStarRating", starRating.toString());
+    formData.append("numericStarRating", starRating);
     formData.append("description", form.review.value);
     formData.append("username", username);
     console.log("Star Rating Type:", typeof starRating, "Value:", starRating);

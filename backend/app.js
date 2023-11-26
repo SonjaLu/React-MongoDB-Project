@@ -129,12 +129,11 @@ function calculateNewAverage(reviews) {
 
 app.post("/addReview", upload.single("pic"), async (req, res) => {
     try {
-        const { name, category, location, state, description, username } = req.body;
-        let { numericStarRating } = req.body;
-        
+        const { name, category, location, state, description, username, numericStarRating } = req.body;
+
         // Konvertiere numericStarRating in eine Zahl und überprüfe, ob es gültig ist
-        numericStarRating = parseFloat(numericStarRating);
-        if (isNaN(numericStarRating)) {
+        const starRating = parseFloat(numericStarRating);
+        if (isNaN(starRating) || starRating < 1 || starRating > 5) {
             return res.status(400).send({ message: "numericStarRating not valid" });
         }
 
@@ -148,7 +147,7 @@ app.post("/addReview", upload.single("pic"), async (req, res) => {
             await existingRestaurant.save();
             res.status(200).send({ message: "Review added to existing restaurant" });
         } else {
-            // Füge ein neues Restaurant hinzu
+            // Für ein neues Restaurant: Bild-Upload verarbeiten
             let pic = "";
             if (req.file) {
                 pic = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
@@ -160,8 +159,8 @@ app.post("/addReview", upload.single("pic"), async (req, res) => {
                 location, 
                 state, 
                 pic,
-                reviews: [{ description, username, numericStarRating }],
-                averageRating: numericStarRating
+                reviews: [{ description, username, starRating }],
+                averageRating: starRating
             });
             await restaurantToAdd.save();
             res.status(201).send({ message: "New restaurant and review added" });
