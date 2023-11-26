@@ -12,7 +12,7 @@ import { useAuth } from '../Login/LoginAuthen';
  */
 const NewReview = () => {
   const { user } = useAuth();
-  console.log("Benutzer im NewReview-Kontext:", user);
+
   const username = user ? user.username : '';
 
   const [name, setName] = useState('');
@@ -49,7 +49,10 @@ const NewReview = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
   
+
+
     const form = formRef.current;
     if (isNaN(starRating) || starRating < 1 || starRating > 5) {
       console.error("Star Rating is not valid:", starRating);
@@ -68,6 +71,8 @@ const NewReview = () => {
       formData.append("pic", form.image.files[0]);
     }
     formData.append("numericStarRating", starRating);
+=======
+ 
     formData.append("description", form.review.value);
     formData.append("username", username);
     console.log("Star Rating Type:", typeof starRating, "Value:", starRating);

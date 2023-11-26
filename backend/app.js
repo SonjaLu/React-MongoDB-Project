@@ -97,26 +97,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 
-/**
- * sergej@2023-10-30 - FÜge neues Review in die DB ein.
- */
-// app.post("/addReview", upload.single("pic"), async (req, res) => {
 
-//     console.log(req.body);
-//     const {id, name, category, location, state,  reviews, starRating, description} = req.body;
-    
-//     const pic = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
-//     console.log("pic: " + pic);
-
-//     const reviewToAdd = new RestaurantModel({id, name, category, location, state, pic , reviews, starRating, description});
-//     try {
-//         const addedReview = await RestaurantModel.create(reviewToAdd);
-
-//         res.status(201).send({ "message": "added new Review" });
-//     } catch {
-//         res.status(500).send({ "message": "could not add Review" });
-//     }
-// })
 function calculateNewAverage(reviews) {
     if (reviews.length === 0) return 0;
 
@@ -165,6 +146,7 @@ app.post("/addReview", upload.single("pic"), async (req, res) => {
             await restaurantToAdd.save();
             res.status(201).send({ message: "New restaurant and review added" });
         }
+
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: "Error adding review" });
@@ -173,56 +155,6 @@ app.post("/addReview", upload.single("pic"), async (req, res) => {
 
 
 
-// function calculateNewAverage(reviews) {
-//     const total = reviews.reduce((acc, review) => acc + (review.numericStarRating || 0), 0);
-//     return reviews.length > 0 ? total / reviews.length : 0;
-// }
-
-// app.post("/addReview", upload.single("pic"), async (req, res) => {
-   
-//     try {
-//         const { name, category, location, state, starRating, description } = req.body;
-//         let pic = "";
-//         if(req.file) {
-//             pic = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
-//         }
-        
-//         const numericRating = Number(numericStarRating);
-//         if (isNaN(numericRating)) {
-//             return res.status(400).send({ message: "starRating not valid" });
-//         }
-
-//         const existingRestaurant = await RestaurantModel.findOne({ name, location });
-
-//         if (existingRestaurant) {
-//             existingRestaurant.reviews.push({ 
-//                 description, 
-//                 username, 
-//                 numericStarRating  // Verwendung von numericStarRating
-//             });
-//             existingRestaurant.averageRating = calculateNewAverage(existingRestaurant.reviews); // Siehe nächster Schritt
-//             await existingRestaurant.save();
-//         } else {
-//             console.error("Reviews ist kein Array:", existingRestaurant.reviews);
-//             // Add new restaurant
-//             const restaurantToAdd = new RestaurantModel({
-//                 name, 
-//                 category, 
-//                 location, 
-//                 state, 
-//                 pic,
-//                 reviews: [{ description, username: req.body.username, starRating }],
-//                 averageRating: starRating
-//             });
-//             await restaurantToAdd.save();
-//         }
-
-//         res.status(201).send({ message: "Review added" });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send({ message: "Error adding review" });
-//     }
-// });
 
 
 /**
