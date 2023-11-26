@@ -15,6 +15,7 @@
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
+
 .restaurant-card:hover {
   cursor: pointer;
   transform: scale(1.1);
@@ -23,6 +24,87 @@
 .restaurant-name {
   display: -webkit-box;
 -webkit-line-clamp: 2; 
+
+  
+  .restaurant-card.spanisch {
+    background-color: #e74c3c; /* Rotton */
+  }
+  
+  .restaurant-card.italienisch {
+    background-color: #52be80; /* Grünton */
+  }
+  
+  .restaurant-card.balkan {
+    background-color: #b2babb; /* Grauton */
+  }
+  
+  .restaurant-card.asiatisch {
+    background-color: #5dade2; /* Blauton */
+  }
+  
+  .restaurant-card.sonstige {
+    background-color: #34495e; /* Dunkelgrauton */
+  }
+  .restaurant-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .restaurant-info {
+    padding: 10px;
+  }
+  
+  .restaurant-name {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .restaurant-stars {
+    color: gold;
+    margin: 5px 0;
+  }
+  
+  .restaurant-location {
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  .createbtn2 {
+    background-color: #89D1D6;
+    border: 2px solid white !important;
+    color: #333;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin-top: 20px;
+    font-weight: bold;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+    z-index: 5;
+  }
+
+  .logoutbtn {
+    background-color: rgb(228, 13, 13);
+    border: 2px solid white !important;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+    z-index: 5;
 }
 
 .restaurant-card.deutsch {

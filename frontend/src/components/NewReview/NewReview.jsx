@@ -131,7 +131,7 @@ const NewReview = () => {
 
         <label htmlFor="category">Choose Category:</label>
         <select id="category" name="category"
-         className={getCategoryClass(category)} 
+        className={getCategoryClass(category)} 
           value={category}
           onChange={handleCategoryChange}
           required>
