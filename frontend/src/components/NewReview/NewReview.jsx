@@ -73,7 +73,6 @@ const NewReview = () => {
       formData.append("pic", form.image.files[0]);
     }
     formData.append("numericStarRating", starRating);
-=======
 
  
     formData.append("description", form.review.value);
