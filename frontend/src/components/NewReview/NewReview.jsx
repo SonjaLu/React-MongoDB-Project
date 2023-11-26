@@ -26,6 +26,12 @@ const NewReview = () => {
   const [starRating, setStarRating] = useState(0);
   const [description, setDescription] = useState('');
 
+  const germanStates = [
+    "Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", 
+    "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", 
+    "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", 
+    "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen", "not sure"
+  ];
 
   //sergej@2023-11-12 - Ref aus dem Video eingefügt.
   const formRef = useRef();
@@ -40,48 +46,6 @@ const NewReview = () => {
   };
 
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log(" reviewtext: " + formRef.current.review.value);
-  //   //zufrüh. Es verursacht fehler. Form ist weiter unten erst erstellt. 
-  //   //formData.append("username", username);
-  //   //console.log("Formulardaten vor dem Senden:", formData);
-  //   navigate('/reviews'); 
-
-  //   const form = formRef.current;
-
-  //   const formData = new FormData();
-  //   formData.append("id", uuidv4());
-  //   formData.append("name", form.name.value);
-  //   formData.append("category", category);
-  //   formData.append("location", form.location.value);
-  //   formData.append("state", form.state.value);
-  //   formData.append("pic", form.image.files[0]);
-  //   // formData.append("reviews");
-  //   formData.append("numericStarRating", starRating);
-  //   formData.append("description", form.review.value);
-  //   formData.append("username", username);
-
-   
-
-
-  //   try{
-  //   const config = {
-  //     url: "http://localhost:8081/addReview",
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "multipart/form-data"
-  //     },
-  //     data: formData
-  //   };
-  //   await axios(config);
-  //   navigate('/reviews');
-  //   // const resp = await axios(config);
-  //   // console.log("### " + resp);
-  //  } catch (error){
-  //   console.error(error);
-  //  }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -163,8 +127,20 @@ const NewReview = () => {
 
 
         <label htmlFor="state">Bundesland:</label>
-        <input type="text" className="state" name="state"
-          required value={state} onChange={e => setState(e.target.value)} />
+        <select 
+        id="state" 
+        name="state"
+        value={state}
+        onChange={e => setState(e.target.value)}
+        required
+      >
+        <option value="">Bitte wählen</option>
+        {germanStates.map((state, index) => (
+          <option key={index} value={state}>{state}</option>
+        ))}
+      </select>
+        
+          {/* required value={state} onChange={e => setState(e.target.value)} /> */}
 
         <div className="file-upload">
           <input
