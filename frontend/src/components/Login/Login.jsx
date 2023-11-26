@@ -110,7 +110,7 @@ function Login() {
           </div>
           <div className="
           ">
-            <Link to="/login/resetpassword">Forgot Password?</Link> 
+            <Link to="/login/askemail">Forgot Password?</Link> 
           </div>
           <button id="submitbtn" type="submit" style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
             Submit
