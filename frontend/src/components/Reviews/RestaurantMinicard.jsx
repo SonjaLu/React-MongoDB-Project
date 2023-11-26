@@ -5,12 +5,28 @@ import './RestaurantMinicard.css';
 // import RestaurantCard from './RestaurantCard';
 import RestaurantBigcard from './RestaurantBigcard';
 import StarRating from '../NewReview/StarRating';
+// import image from "./src/assets/image.jpg";
 
 const RestaurantCard = ({ name, pic, starRating, location, category, averageRating }) => {
     const categoryClass = category.replace(/\s+/g, '-').toLowerCase();
+
+    let imagePath;
+    if (pic.startsWith('http')) {
+        // Für hochgeladene Bilder aus externen Quellen
+        imagePath = pic;
+    } else if (pic.includes('/uploads/')) {
+        // Für hochgeladene Bilder im "public/uploads"-Ordner
+        imagePath = `/uploads/${pic.split('/uploads/').pop()}`;
+    } else if (pic.startsWith("./src/assets")) {
+        // Für statische Bilder im "public/assets"-Ordner
+        imagePath = `${pic.replace('./src/assets/', '/assets/')}`;
+    } else {
+        // Fallback für fehlende oder ungültige Bildpfade
+        imagePath = '/assets/no-image.png'; 
+    }
     return (
         <div className={`restaurant-card ${categoryClass}`}>
-            <img src={pic} alt={name} className="restaurant-image"/>
+            <img src={imagePath} alt={name} className="restaurant-image"/>
             <div className="restaurant-info">
                 <h3 className="restaurant-name">{name}</h3>
                 <StarRating rating={averageRating} />
@@ -22,34 +38,6 @@ const RestaurantCard = ({ name, pic, starRating, location, category, averageRati
 };
 
 
-// const RestaurantList = ({ restaurants }) => {
-//     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-
-//     const handleCardClick = (restaurant) => {
-//         setSelectedRestaurant(restaurant);
-//     };
-
-//     return (
-//         <div>
-//             <RestaurantBigcard restaurant={selectedRestaurant} />
-//             <div className="restaurant-list">
-//                 {restaurants.map((restaurant) => (
-//                     <div onClick={() => handleCardClick(restaurant)} key={restaurant.name}>
-//                         <RestaurantCard
-//                             name={restaurant.name}
-//                             pic={restaurant.pic}
-//                             starRating={restaurant.starRating}
-//                             location={restaurant.location}
-//                             category={restaurant.category}
-//                         />
-//                     </div>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default RestaurantList;
 
 const RestaurantList = ({ restaurants }) => {
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
