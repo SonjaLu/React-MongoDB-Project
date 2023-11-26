@@ -26,13 +26,21 @@ label {
   margin-bottom: 8px;
 }
 
-#category, #state {
+#state {
   width: 60%;
   padding: 5px;
   margin-bottom: 15px;
   border-radius: 5px;
   text-align: center;
   background-color: #85C8D9;
+}
+#category {
+  width: 60%;
+  padding: 5px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
+ 
 }
 input[type="text"] {
   width: 80%;
@@ -99,6 +107,26 @@ input[type="submit"]:hover {
   background-color: #0056b3;
 }
 
+.italian-style {
+  background-color: #52be80; 
+}
 
+.deutsch-style {
+  background-color: #f9e79f; 
+}
+.asiatisch-style {
+  background-color: #5dade2; 
+}
 
+.balkan-style {
+  background-color: #b2babb; 
+}
+
+.spanisch-style {
+  background-color: #e74c3c; 
+}
+
+.sonstige-style {
+  background-color: #34495e; 
+}
 
