@@ -13,6 +13,8 @@ const UserModel = require('./models/UserSchema')
 const app = express();
 const PORT = process.env.PORT || 8081;
 const crypto = require('crypto');
+const nodmailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
 
 
 // CORS-Konfiguration
@@ -204,72 +206,105 @@ app.post("/deleteReview/:id", async (req, res) => {
 })
 
 
-// app.post("/forgotpassword", async (req, res) => {
-//     try {
-//         const { email } = req.body;
-//         const user = await UserModel.findOne({ email });
-
-//         if (user) {
-//             const resetToken = generateResetToken(); 
-//             const expiryDate = new Date();
-//             expiryDate.setHours(expiryDate.getHours() + 1); 
-//             user.passwordResetToken = resetToken;
-//             user.tokenExpiry = expiryDate;
-
-//             await user.save();
-//             // Senden einer E-Mail mit dem Token
-//             sendResetEmail(email, resetToken); 
-//         }
-//         res.status(200).send({ message: "If an account with that email exists, instructions for resetting your password have been sent." });
-//     } catch (error) {
-//         console.error("Error in /forgotpassword route:", error);
-//         res.status(500).send({ message: "Internal Server Error" });
-//     }
-// });
-
-// Beispiel-Route für Passwort-Zurücksetzungsanfrage
+/**
+ * sergej@2023-11-23 - Setze Password zurück.
+ * Funktioniert: Email senden und Code senden.
+ */
 app.post('/request-reset', async (req, res) => {
-    const { email } = req.body;
-    const user = await UserModel.findOne({ email });
+    console.log("reset-request");
 
-    if (!user) {
-        return res.status(400).send('Benutzer nicht gefunden.');
+    const { email } = req.body;
+
+    console.log("email. Backend: " + email);
+    if (!email) {
+        return res.status(404).send({ message: "Bitte Email angeben." });
     }
 
-    const resetToken = crypto.randomBytes(20).toString('hex');
-    const expiryDate = new Date();
-    expiryDate.setMinutes(expiryDate.getMinutes() + 5); // 5 Min gültig
+    try {
+        const user = await UserModel.findOne({ email });
 
-    user.passwordResetToken = resetToken;
-    user.tokenExpiry = expiryDate;
+        if (!user) {
+            return res.status(404).send({ message: "User not exists" });
+        }
 
-    await user.save();
+        const code = Math.floor(100000 + Math.random() * 900000);
+        console.log(code);
 
-    // Token direkt senden (nicht empfohlen für Produktionsumgebungen)
-    res.json({ resetToken });
+        const transporter = nodmailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD_EMAIL,
+            }
+        });
+
+        const mailMessage = {
+            from: process.env.EMAIL,
+            to: email,
+            subject: "Reset password with 6 digit number",
+            text: `Your reset Code is ${code}`
+        };
+
+        transporter.sendMail(mailMessage, (error, info) => {
+            if (error) {
+                console.log("Some error: " + error);
+                //return message to frontend
+            } else {
+                console.log("Email send: " + info);
+                //email als jwt token zurückgeben
+
+                const token = jwt.sign({ email: email }, process.env.JWT_SECRET);
+                //return message to frontend.
+                //console.log("backend: " + token + "code: " + code);
+                res.status(200).send({ code, token, message: "Reset number sent to Email" });
+            }
+        })
+
+    } catch (e) {
+        res.status(500).send({ message: "Server error" });
+    }
 });
 
-app.post('/reset-password', async (req, res) => {
-    const { email, token, newPassword } = req.body;
+app.put('/reset-password', async (req, res) => {
 
-    // if (newPassword !== confirmPassword) {
-    //     return res.status(400).send('Passwörter stimmen nicht überein.');
-    // }
-    
-    const user = await UserModel.findOne({ email, passwordResetToken: token, tokenExpiry: { $gte: new Date() } });
+    try {
+        const password = req.body.password;
+        const token = req.headers.authorization.split(" ")[1];
 
-    if (!user) {
-        return res.status(400).send('Ungültiger oder abgelaufener Token.');
+        console.log(password);
+        console.log("reset-password token: " + token);
+
+        console.log("### process.env.JWT_SECRET: " + process.env.JWT_SECRET);
+
+
+        if (!password || !token) {
+            return res.status(400).send({ message: "Missing password !" });
+        }
+
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("decodedToken: " + decodedToken);
+        const user = UserModel.findOne({ email: decodedToken.email });
+        console.log(user);
+
+
+        if (!user) {
+            return res.status(404).set({ message: "User not exists" });
+        }
+
+        const newHashedPassword = await bcrypt.hash(password, 10);
+        console.log(newHashedPassword);
+        const userSet = await UserModel.findOneAndUpdate({ email: decodedToken.email }, { $set: { hashedPassword: newHashedPassword } })
+
+        console.log("password hashed and saved")
+        res.status(200).send({ message: "Password updated" });
+
+    } catch (error) {
+        res.status(500).send({ message: "internal servier error" });
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.hashedPassword = hashedPassword;
-    user.passwordResetToken = undefined; // Token entfernen
-    user.tokenExpiry = undefined; // Ablaufdatum entfernen
-
-    await user.save();
-
-    res.send('Passwort erfolgreich zurückgesetzt.');
+    //[0] reset-password token: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+    //eyJlbWFpbCI6Ijc5eHg5N0BnbWFpbC5jb20iL
+    //CJpYXQiOjE3MDEwMDY1MTV9.rtVsMk2T6iw8pYB8PHwty8b6N7N31v5oCEkOXRRWSus
 });
 
 
