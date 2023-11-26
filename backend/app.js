@@ -97,26 +97,64 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 
-/**
- * sergej@2023-10-30 - FÜge neues Review in die DB ein.
- */
+
+function calculateNewAverage(reviews) {
+    if (reviews.length === 0) return 0;
+
+    const total = reviews.reduce((acc, review) => {
+        return acc + (isNaN(review.numericStarRating) ? 0 : review.numericStarRating);
+    }, 0);
+
+    return total / reviews.length;
+}
+
 app.post("/addReview", upload.single("pic"), async (req, res) => {
-
-    console.log(req.body);
-    const {id, name, category, location, state,  reviews, starRating, description} = req.body;
-    
-    const pic = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
-    console.log("pic: " + pic);
-
-    const reviewToAdd = new RestaurantModel({id, name, category, location, state, pic , reviews, starRating, description});
     try {
-        const addedReview = await RestaurantModel.create(reviewToAdd);
+        const { name, category, location, state, description, username, numericStarRating } = req.body;
 
-        res.status(201).send({ "message": "added new Review" });
-    } catch {
-        res.status(500).send({ "message": "could not add Review" });
+        // Konvertiere numericStarRating in eine Zahl und überprüfe, ob es gültig ist
+        const starRating = parseFloat(numericStarRating);
+        if (isNaN(starRating) || starRating < 1 || starRating > 5) {
+            return res.status(400).send({ message: "numericStarRating not valid" });
+        }
+
+        // Überprüfe, ob das Restaurant bereits existiert
+        const existingRestaurant = await RestaurantModel.findOne({ name, location });
+
+        if (existingRestaurant) {
+            // Füge die Bewertung zum existierenden Restaurant hinzu
+            existingRestaurant.reviews.push({ description, username, numericStarRating });
+            existingRestaurant.averageRating = calculateNewAverage(existingRestaurant.reviews);
+            await existingRestaurant.save();
+            res.status(200).send({ message: "Review added to existing restaurant" });
+        } else {
+            // Für ein neues Restaurant: Bild-Upload verarbeiten
+            let pic = "";
+            if (req.file) {
+                pic = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+            }
+
+            const restaurantToAdd = new RestaurantModel({
+                name, 
+                category, 
+                location, 
+                state, 
+                pic,
+                reviews: [{ description, username, starRating }],
+                averageRating: starRating
+            });
+            await restaurantToAdd.save();
+            res.status(201).send({ message: "New restaurant and review added" });
+        }
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Error adding review" });
     }
-})
+});
+
+
+
 
 
 /**
@@ -234,6 +272,7 @@ app.post('/reset-password', async (req, res) => {
     res.send('Passwort erfolgreich zurückgesetzt.');
 });
 
+
 //==== Benutzer updaten ====
 app.post("/changeuser", limiter, async (req, res) => {
     console.log(req.body);
@@ -256,6 +295,16 @@ app.post("/changeuser", limiter, async (req, res) => {
       res.status(500).send({ message: "Error beim Ändern des Benutzers" });
     }
   }); 
+
+const addReview = async (restaurantId, newRating) => {
+    const restaurant = await Restaurant.findById(restaurantId);
+    restaurant.starRating += newRating; // Update der Gesamtbewertung
+    restaurant.reviews += 1; // Erhöhung der Anzahl der Bewertungen
+    restaurant.averageRating = restaurant.starRating / restaurant.reviews; // Neuer Durchschnitt
+    // Speichern des aktualisierten Dokuments
+    await restaurant.save();
+  };
+
 
 // //erste route. prüfe ob alles ordentlich funktioniert.
 // //wichtig: message: "text" und nicht "mesage" :"text" schreiben.

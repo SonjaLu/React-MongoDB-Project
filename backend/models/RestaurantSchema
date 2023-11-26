@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 // Schema für einzelne Bewertungen
 const reviewSchema = new mongoose.Schema({
   description: String,
-  username: String
+  username: String,
+  numericStarRating: Number
 });
 
 // Haupt-Schema für Restaurants
@@ -15,9 +16,17 @@ const restaurantSchema = new mongoose.Schema({
   location: String,
   state: String,
   pic: String, // Pfad zum Bild oder URL
-  reviews: Number,
-  starRating: String,
-  descriptions: [reviewSchema] // Verwendung des Review-Schemas für Bewertungen
+ 
+  reviews: [{ 
+    description: String, 
+    username: String, 
+    numericStarRating: Number
+}],
+
+  averageRating: { type: Number, default: 0 }, // Durchschnittsbewertung
+  totalRating: { type: Number, default: 0 }, // Gesamtbewertung
+  numberOfRatings: { type: Number, default: 0 },
+  descriptions: [reviewSchema] 
 });
 
 // Modell erstellen

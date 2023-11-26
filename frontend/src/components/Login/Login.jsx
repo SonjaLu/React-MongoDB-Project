@@ -71,7 +71,7 @@ function Login() {
         setLoginError(true);
       }
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('Login failed:' + error);
       setLoginError(true);
     }
   };

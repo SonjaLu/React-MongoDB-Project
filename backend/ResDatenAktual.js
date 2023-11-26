@@ -1,25 +1,57 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-const Restaurant = require('./models/RestaurantSchema'); // Pfad zum Mongoose-Modell
-const restaurantData = require('./PlaceholderRestaurants'); // Pfad zur JSON-Daten-Datei
+const Restaurant = require('./models/RestaurantSchema');
+const restaurantData = require('./PlaceholderRestaurants');
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Hilfsfunktion zur Berechnung des Durchschnitts-Ratings
+function calculateAverageRating(starRating) {
+    const stars = starRating.split('').filter(char => char === '★').length;
+    return stars;
+}
+
+// async function updateRestaurants() {
+//   for (const data of restaurantData) {
+//     const averageRating = calculateAverageRating(data.starRating);
+
+//     const updatedData = {
+//       ...data,
+//       averageRating 
+//     };
+
+//     delete updatedData.starRating;
+//     await Restaurant.updateOne(
+//       { name: data.name }, // Suchkriterium
+//       updatedData, 
+//       { upsert: true } 
+//     );
+//   }
+
 async function updateRestaurants() {
   for (const data of restaurantData) {
-    await Restaurant.updateOne(
-      { name: data.name }, // Suchkriterium, z.B. Name des Restaurants
-      data, // Aktualisierte Daten
-      { upsert: true } // Erstellt ein neues Dokument, falls keines gefunden wird
-    );
+      const existingRestaurant = await Restaurant.findOne({ name: data.name });
+
+      if (existingRestaurant) {
+          // Aktualisiere das bestehende Restaurant
+          await Restaurant.updateOne(
+              { _id: existingRestaurant._id },
+              { $set: data }
+          );
+      } else {
+          // Füge ein neues Restaurant hinzu
+          const newRestaurant = new Restaurant(data);
+          await newRestaurant.save();
+      }
   }
 
   console.log("Restaurants aktualisiert");
 }
 
-updateRestaurants()
-  .then(() => mongoose.disconnect())
-  .catch(err => {
-    console.error(err);
-    mongoose.disconnect();
-  });
+
+updateRestaurants().then(() => mongoose.disconnect());
+  console.log("Restaurants aktualisiert");
+
+
+
+updateRestaurants().then(() => mongoose.disconnect());
