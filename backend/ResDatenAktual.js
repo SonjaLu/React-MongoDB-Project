@@ -45,7 +45,7 @@ async function updateRestaurants() {
       }
   }
 
-  console.log("Restaurants aktualisiert");
+
 }
 
 
@@ -54,4 +54,4 @@ updateRestaurants().then(() => mongoose.disconnect());
 
 
 
-updateRestaurants().then(() => mongoose.disconnect());
+

@@ -31,7 +31,7 @@ function generateResetToken() {
 }
 
 // Statische Dateien
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, '../frontend/public/uploads')));
 app.use('/assets', express.static(path.join(__dirname, '../frontend/src/assets')));
 
 // Rate Limiting
@@ -133,7 +133,8 @@ app.post("/addReview", upload.single("pic"), async (req, res) => {
             // Für ein neues Restaurant: Bild-Upload verarbeiten
             let pic = "";
             if (req.file) {
-                pic = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+                pic = `/uploads/${req.file.filename}`;
+                // pic = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
             }
 
             const restaurantToAdd = new RestaurantModel({
