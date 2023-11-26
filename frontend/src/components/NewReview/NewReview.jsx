@@ -50,7 +50,9 @@ const NewReview = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  
+    
+   
+    //navigate('/reviews'); 
 
 
     const form = formRef.current;
@@ -74,6 +76,7 @@ const NewReview = () => {
 =======
  
     formData.append("description", form.review.value);
+
     formData.append("username", username);
     console.log("Star Rating Type:", typeof starRating, "Value:", starRating);
     try {
@@ -95,6 +98,7 @@ const NewReview = () => {
       } else {
         console.error("Error setting up the request:", error.message);
       }
+
     }
   };
   
