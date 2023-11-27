@@ -82,7 +82,7 @@ function Login() {
 
   return (
     <>
-      <h1 id="headline">GOURMET EXPLORER</h1>
+      <h1 id="headline">GOURMET<br/> EXPLORER</h1>
       <div className="showbox2">
         <h1 id="loginheadline">Login</h1>
         <form onSubmit={handleSubmit}>

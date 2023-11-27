@@ -35,7 +35,7 @@ overflow: hidden;
 
 }
 
-#headline {
+/* #headline {
   font-size: 70px;
   color: white;
   text-align: center; 
@@ -46,7 +46,31 @@ overflow: hidden;
   letter-spacing: 8px;
   justify-content: center;
   text-shadow: 2px 2px 4px #000000;
+} */
+#headline {
+	text-align: center;
+	color: white;
+  top: 30px;
+	font-family: 'lato', sans-serif;
+	font-size: 70px;
+	line-height: 90px;
+	letter-spacing: 15px;
+	text-shadow: 0 1px 0 #efefef,
+				 0 2px 0 #efefef,
+				 0 3px 0 #efefef,
+				 0 4px 0 #efefef,
+				 0 30px 5px rgba(0,0,0,.1);
+
+	animation: float 3s linear infinite;
+	animation-direction: alternate;
 }
+
+@keyframes float {
+	from { transform: rotate(5deg); }
+
+	to { transform: rotate(-5deg); }
+}
+
 
 #navbar {
   width: 100%;
