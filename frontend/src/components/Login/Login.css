@@ -32,7 +32,7 @@
     align-items: center;
     top: 40%;
     height: 30px !important;
-    padding-left: 10px;
+    padding-left: 15px !important;
 }
 
 .forgot-password-link {

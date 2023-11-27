@@ -1,0 +1,16 @@
+.custom-file-upload {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    cursor: pointer;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+    /* Weitere Stile nach Wunsch */
+  }
+  
+  .file-name {
+    /* Stil für den Dateinamen-Text */
+    margin-left: 10px;
+    /* Weitere Stile nach Wunsch */
+  }
+  

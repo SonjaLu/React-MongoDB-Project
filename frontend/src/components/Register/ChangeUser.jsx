@@ -118,7 +118,7 @@ const ChangeUser = ({id}) => {
 
         <div>
         <input type="submit" className="submit" value="Send Change" />
-        <div className="back-button" onClick={onCloseRegister} style={{ position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer' }}>
+        <div className="longbtn" onClick={onCloseRegister} style={{ position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer' }}>
         &#8592; back
         </div>
         </div>
