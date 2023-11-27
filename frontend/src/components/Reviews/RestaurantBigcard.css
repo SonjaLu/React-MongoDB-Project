@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     flex: 1;
-
+margin-right: 20%;
 }
 
 .respic{
@@ -30,6 +30,7 @@
     border: 2px solid white !important;
     font-weight: bold;
     box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+    z-index: 5px;
   }
 
   .details-container {
@@ -37,6 +38,7 @@
     justify-content: space-between; 
     align-items: flex-start;
     margin-right: 15px;
+    width: 100%;
 }
 
 .comments-section {

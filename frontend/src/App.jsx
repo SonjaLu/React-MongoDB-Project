@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import './components/Login/Login.css';
-import './components/showBox/Showbox.css';
+// import './components/showBox/Showbox.css';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Reviews from './components/Reviews/Reviews';

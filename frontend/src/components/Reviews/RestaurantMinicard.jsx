@@ -85,7 +85,7 @@ const RestaurantList = ({ restaurants }) => {
                     ))}
                 </div>
             )}
-             <button className="logoutbtn" onClick={handleLogout} style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
+             <button className="logoutbtn" onClick={handleLogout}  style={{ backgroundColor: 'red', position: 'absolute', padding: '8px', border: '1px solid white', bottom: '10px', right: '10px' }}>
                 Logout
             </button>
         </div>

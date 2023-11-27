@@ -5,6 +5,7 @@ import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Login/LoginAuthen';
+import FileUpload from './FileUpload';
 /**
  * sergej@2023-11-04 
  * Formular um die neue Bewertungen zu erstellen.
@@ -164,15 +165,17 @@ const NewReview = () => {
       </select>
         
           {/* required value={state} onChange={e => setState(e.target.value)} /> */}
-
-        <div className="file-upload">
+          <div className="file-upload">
+  <FileUpload />
+</div>
+        {/* <div className="file-upload">
           <input
             className="image"
             type="file"
             accept="image/*"
             name="image"/>
-          <button className="uploadbtn">upload fotos</button>
-        </div><br />
+          
+        </div><br /> */}
 
         <label>Star rating:</label>
         <div className="rating">
@@ -211,6 +214,7 @@ const NewReview = () => {
         <textarea className="review" name="review" required value={description}
           onChange={e => setDescription(e.target.value)}></textarea>
 
+        {/* <input id="submit-input" type="submit" className="submit" value="Send Review" /> */}
         <input type="submit" className="submit" value="Send Review" />
 
       </form>
