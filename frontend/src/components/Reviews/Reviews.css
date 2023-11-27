@@ -11,9 +11,10 @@
     margin-bottom: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
 
+
 }
 
-.animbtn {
+/* .animbtn {
     background-color: #89D1D6;
     border: none;
     color: #333;
@@ -32,4 +33,133 @@
     display: flex;
     margin-left: 20%;
     box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
-}
+} */
+
+.animbtn {
+    min-width: 300px;
+    min-height: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: #89D1D6;
+  background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+    margin-top: 20px;
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+    }
+  
+    .animbtn::before {
+  content: '';
+    border-radius: 1000px;
+    min-width: calc(300px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid #00FFCB;
+    box-shadow: 0 0 60px rgba(0,255,203,.64);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+  }
+  
+  .animbtn:hover, .button:focus {
+    color: #313133;
+    transform: translateY(-6px);
+  }
+  
+  .animbtn:hover::before, button:focus::before {
+    opacity: 1;
+  }
+  
+  .animbtn::after {
+    content: '';
+    width: 30px; height: 30px;
+    border-radius: 100%;
+    border: 6px solid #00FFCB;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+  }
+  
+  .animbtn:hover::after, button:focus::after {
+    animation: none;
+    display: none;
+  }
+  
+  @keyframes ring {
+    0% {
+      width: 30px;
+      height: 30px;
+      opacity: 1;
+    }
+    100% {
+      width: 250px;
+      height: 250px;
+      opacity: 0;
+    }
+  }
+
+  
+#barBox {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 200px; 
+    background-color: darkslategrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .sidebar-button {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .main-content {
+    display: flex;
+  }
+  
+  .restaurant-list-container {
+    flex-grow: 1; 
+  }
+  
+  
+  .createbtn2 {
+    background-color: #89D1D6;
+    border: 2px solid white !important;
+    color: #333;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin-top: 20px;
+    font-weight: bold;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+    z-index: 5!important;
+  }

@@ -62,10 +62,8 @@ const RestaurantList = ({ restaurants }) => {
     };
     return (
         <>
-        <div>
-             <button className="createbtn2" onClick={handleCreateReview} style={{ position: 'absolute', top: '10px', right: '10px' }}>
-                Create new Review
-            </button>
+       
+            <div>
             {selectedRestaurant ? (
                 <RestaurantBigcard restaurant={selectedRestaurant} onClose={handleClose} />
                
@@ -85,10 +83,8 @@ const RestaurantList = ({ restaurants }) => {
                     ))}
                 </div>
             )}
-             <button className="logoutbtn" onClick={handleLogout}  style={{ backgroundColor: 'red', position: 'absolute', padding: '8px', border: '1px solid white', bottom: '10px', right: '10px' }}>
-                Logout
-            </button>
-        </div>
+            </div> 
+           
     </>
     );
 };
