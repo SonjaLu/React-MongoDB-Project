@@ -45,7 +45,7 @@ function Reviews() {
               Sort by State
             </button>
             <button className="createbtn2">
-              areasearch
+              Search by Area
             </button>
             <button className="sidebar-button" onClick={handleLogout} style={{ backgroundColor: 'red' }}>
               Logout
