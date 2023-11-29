@@ -1,40 +1,40 @@
-
 import { useState } from 'react';
 
-const useRestaurantReviews = () => {
+// const useRestaurantReviews = () => {
+  export default function useRestaurantReviews() {
   const [showRestaurants, setShowRestaurants] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
 
-  // const showAllReviews = () => {
-  //   fetch('http://localhost:8080/api/restaurants')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setRestaurants(data);
-  //       setShowRestaurants(true);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error:', error);
-  //     });
-  // };
+  
+  const fetchRestaurants = async (sortType = '') => {
+    let url = 'http://localhost:8081/api/restaurants';
+    if (sortType) {
+      url += `?sortBy=${sortType}`; // Fügt den Sortierparameter zur URL hinzu
+    }
 
-  const showAllReviews = () => {
-    console.log('showAllReviews called');
-    fetch('http://localhost:8081/api/restaurants')
-      .then(response => {
-        console.log('Response received');
-        return response.json();
-      })
-      .then(data => {
-        console.log('Data:', data);
-        setRestaurants(data);
-        setShowRestaurants(true);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setRestaurants(data);
+      setShowRestaurants(true);
+    } catch (error) {
+      console.error('Fehler beim Abrufen der Restaurants:', error);
+    }
   };
 
-  return { showRestaurants, restaurants, showAllReviews };
+  const showAllReviews = () => {
+    fetchRestaurants(); // Abrufen aller Restaurants ohne Sortierung
+  };
+
+  const fetchSortedByState = () => {
+    fetchRestaurants('state'); // Abrufen und Sortieren der Restaurants nach Bundesstaat
+  };
+
+  const fetchSortedAlphabetically = () => {
+    fetchRestaurants('name'); // Abrufen und Sortieren der Restaurants alphabetisch
+  };
+
+  return { showRestaurants, restaurants, showAllReviews, fetchSortedByState, fetchSortedAlphabetically };
 };
 
-export default useRestaurantReviews;
+// export default useRestaurantReviews;
