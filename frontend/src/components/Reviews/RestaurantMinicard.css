@@ -88,6 +88,13 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
     z-index: 5!important;
   }
+  .createbtn2:hover,
+  .createbtn2:focus {
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+    transition: all 150ms ease-in-out;
+  }
 
   .logoutbtn {
     background-color: rgb(228, 13, 13);
@@ -107,7 +114,13 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
     z-index: 5;
 }
-
+.logoutbtn:hover,
+.logoutbtn:focus {
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+    transition: all 150ms ease-in-out;
+  }
 .restaurant-card.deutsch {
   background-color: #f9e79f;
   

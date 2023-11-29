@@ -30,8 +30,19 @@ margin-right: 20%;
     border: 2px solid white !important;
     font-weight: bold;
     box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+    
     z-index: 5px;
   }
+
+  .createbtn2:hover,
+  .createbtn2:focus {
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+    transition: all 150ms ease-in-out;
+  }
+
+ 
 
   .details-container {
     display: flex;
@@ -55,4 +66,12 @@ margin-right: 20%;
     padding: 10px 20px;
     margin-top: 30px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+  }
+
+  .longbtn:hover,
+  .longbtn:focus {
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+    transition: all 150ms ease-in-out;
   }
