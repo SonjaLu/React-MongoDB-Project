@@ -54,14 +54,26 @@ app.get("/", (req, res) => {
     res.send("Hallo Welt von meinem Express-Server!");
 });
 
+
+
 app.get('/api/restaurants', async (req, res) => {
     try {
-        const restaurants = await RestaurantModel.find({});
+        const { sortBy } = req.query;
+        let queryOptions = {};
+
+        if (sortBy === 'state') {
+            queryOptions.sort = { state: 1 };
+        } else if (sortBy === 'name') {
+            queryOptions.sort = { name: 1 }; // Sortieren nach 'name' in aufsteigender Reihenfolge
+        }
+
+        const restaurants = await RestaurantModel.find({}, null, queryOptions);
         res.json(restaurants);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
+
 
 app.post("/login", async (req, res) => {
     try {

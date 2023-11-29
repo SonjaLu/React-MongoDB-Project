@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Reviews() {
-  const { showRestaurants, restaurants, showAllReviews } = useRestaurantReviews();
+  const { showRestaurants, restaurants, fetchSortedByState, fetchSortedAlphabetically, showAllReviews } = useRestaurantReviews();
+  
   const navigator = useNavigate();
   const handleCreateReview = () => {
     navigator('/newreview');
@@ -41,7 +42,10 @@ function Reviews() {
             <button className="createbtn2" onClick={handleCreateReview}>
               Create new Review
             </button>
-            <button className="createbtn2">
+            <button className="createbtn2" onClick={fetchSortedAlphabetically}>
+              Sort by Name
+            </button>
+            <button className="createbtn2" onClick={fetchSortedByState}>
               Sort by State
             </button>
             <button className="createbtn2">
