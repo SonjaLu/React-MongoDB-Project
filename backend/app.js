@@ -88,7 +88,9 @@ app.post("/login", async (req, res) => {
 
 const storage = multer.diskStorage({
     destination: function (req,file, cb) {
-        cb (null, 'uploads/')
+        //Korrektur des Pfades damit die Bilder in frontend gespeichert werden. 
+        //cb (null, 'uploads/')
+        cb(null, path.join(__dirname, '../frontend/public/uploads/'))
     },
     filemane : function(req, file, cb){
         const uniqueFileName = Date.now() + '-' + file.originalName; 
