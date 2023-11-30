@@ -54,6 +54,7 @@ function Login() {
 
   return (
     <>
+     <div className="login-animated-image login-left-image"></div>
       <h1 id="headline">GOURMET<br /> EXPLORER</h1>
       <div className="showbox2">
         <h1 id="loginheadline">Login</h1>
@@ -89,7 +90,9 @@ function Login() {
         <div className="back-button" onClick={onCloseRegister} style={{ position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer' }}>
           &#8592; back
         </div>
+        
       </div>
+      <div className="login-animated-image login-right-image"></div> 
     </>
   );
 }
