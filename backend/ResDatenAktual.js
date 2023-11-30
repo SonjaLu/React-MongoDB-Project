@@ -11,46 +11,28 @@ function calculateAverageRating(starRating) {
     return stars;
 }
 
-// async function updateRestaurants() {
-//   for (const data of restaurantData) {
-//     const averageRating = calculateAverageRating(data.starRating);
-
-//     const updatedData = {
-//       ...data,
-//       averageRating 
-//     };
-
-//     delete updatedData.starRating;
-//     await Restaurant.updateOne(
-//       { name: data.name }, // Suchkriterium
-//       updatedData, 
-//       { upsert: true } 
-//     );
-//   }
 
 async function updateRestaurants() {
-  for (const data of restaurantData) {
-      const existingRestaurant = await Restaurant.findOne({ name: data.name });
+    for (const data of restaurantData) {
+        const existingRestaurant = await Restaurant.findOne({ name: data.name });
 
-      if (existingRestaurant) {
-          // Aktualisiere das bestehende Restaurant
-          await Restaurant.updateOne(
-              { _id: existingRestaurant._id },
-              { $set: data }
-          );
-      } else {
-          // Füge ein neues Restaurant hinzu
-          const newRestaurant = new Restaurant(data);
-          await newRestaurant.save();
-      }
-  }
-
-
+        if (existingRestaurant) {
+            // Aktualisiere das bestehende Restaurant
+            await Restaurant.updateOne(
+                { _id: existingRestaurant._id },
+                { $set: data }
+            );
+        } else {
+            // Füge ein neues Restaurant hinzu
+            const newRestaurant = new Restaurant(data);
+            await newRestaurant.save();
+        }
+    }
 }
 
 
 updateRestaurants().then(() => mongoose.disconnect());
-  console.log("Restaurants aktualisiert");
+console.log("Restaurants aktualisiert");
 
 
 

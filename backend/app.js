@@ -8,7 +8,7 @@ const rateLimit = require('express-rate-limit');
 const multer = require('multer');
 
 // Importieren Sie hier Ihre Mongoose-Modelle
-const RestaurantModel = require('./models/RestaurantSchema'); 
+const RestaurantModel = require('./models/RestaurantSchema');
 const UserModel = require('./models/UserSchema')
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -46,8 +46,8 @@ mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-.then(() => console.log("Erfolgreich mit MongoDB verbunden"))
-.catch(error => console.error("Fehler bei der Verbindung zu MongoDB: ", error));
+    .then(() => console.log("Erfolgreich mit MongoDB verbunden"))
+    .catch(error => console.error("Fehler bei der Verbindung zu MongoDB: ", error));
 
 // Routen
 app.get("/", (req, res) => {
@@ -93,24 +93,22 @@ app.post("/login", async (req, res) => {
         res.status(200).send({ message: "Login succesful", user });
     } catch (error) {
         res.status(500).send({ message: "Servererror:npm run dev" });
-        
     }
 });
 
 
 const storage = multer.diskStorage({
-    destination: function (req,file, cb) {
+    destination: function (req, file, cb) {
         //Korrektur des Pfades damit die Bilder in frontend gespeichert werden. 
-        //cb (null, 'uploads/')
         cb(null, path.join(__dirname, '../frontend/public/uploads/'))
     },
-    filemane : function(req, file, cb){
-        const uniqueFileName = Date.now() + '-' + file.originalName; 
-        console.log("uniqueFileName: " +uniqueFileName);
+    filemane: function (req, file, cb) {
+        const uniqueFileName = Date.now() + '-' + file.originalName;
+        console.log("uniqueFileName: " + uniqueFileName);
         cb(null, uniqueFileName);
     }
 })
-const upload = multer({storage: storage});
+const upload = multer({ storage: storage });
 
 
 
@@ -148,14 +146,13 @@ app.post("/addReview", upload.single("pic"), async (req, res) => {
             let pic = "";
             if (req.file) {
                 pic = `/uploads/${req.file.filename}`;
-                // pic = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
             }
 
             const restaurantToAdd = new RestaurantModel({
-                name, 
-                category, 
-                location, 
-                state, 
+                name,
+                category,
+                location,
+                state,
                 pic,
                 reviews: [{ description, username, starRating }],
                 averageRating: starRating
@@ -179,45 +176,42 @@ app.post("/addReview", upload.single("pic"), async (req, res) => {
  */
 //route für Register.
 app.use(express.json());
-app.post("/register", limiter, async (req,res) => {
+app.post("/register", limiter, async (req, res) => {
     console.log(req.body);
 
-    try{
-    const {id, firstName, lastName, email, username, password } = req.body;
-    if (!firstName || !email || !password ||  !username || !lastName) {
-       return res.status(404).send({message: "Nich alle Felder wurden ausgefüllt"});
+    try {
+        const { id, firstName, lastName, email, username, password } = req.body;
+        if (!firstName || !email || !password || !username || !lastName) {
+            return res.status(404).send({ message: "Nich alle Felder wurden ausgefüllt" });
+        }
+
+        const existingUser = await UserModel.findOne({ email });
+        if (existingUser) {
+            return res.status(409).send({ message: "Benutzer ist schon vorhanden" });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const user = new UserModel({ id, firstName, lastName, email, username, hashedPassword });
+
+        await UserModel.create(user);
+        res.status(201).send({ message: "User wurde erstellt" });
+    } catch (error) {
+        res.status(500).send({ message: "Error beim Erstellen des Benutzers" });
     }
-
-    const existingUser = await UserModel.findOne({email});
-    if (existingUser){
-       return res.status(409).send({message: "Benutzer ist schon vorhanden"});
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    // const hashedPasswordConfirm = await bcrypt.hash(passwordRepeat, 10);
-
-
-    const user = new UserModel({id, firstName, lastName, email, username, hashedPassword});
-  
-    await UserModel.create(user);
-    res.status(201).send({message: "User wurde erstellt"});
-   } catch(error){
-       res.status(500).send({message: "Error beim Erstellen des Benutzers"});
-
-   }
 })
 
 //  Route zum Löschen des Bewertungen aus der Datenbank. 
 app.post("/deleteReview/:id", async (req, res) => {
 
-   try {
-       const {reviewID} = req.params;
-       await ReviewModel.deleteOne(reviewID);
+    try {
+        const { reviewID } = req.params;
+        await ReviewModel.deleteOne(reviewID);
 
-       res.status(201).send({ "message": "delete Review" });
-   } catch {
-       res.status(500).send({ "message": "could not delete Review" });
-   }
+        res.status(201).send({ "message": "delete Review" });
+    } catch {
+        res.status(500).send({ "message": "could not delete Review" });
+    }
 })
 
 
@@ -270,7 +264,6 @@ app.post('/request-reset', async (req, res) => {
 
                 const token = jwt.sign({ email: email }, process.env.JWT_SECRET);
                 //return message to frontend.
-                //console.log("backend: " + token + "code: " + code);
                 res.status(200).send({ code, token, message: "Reset number sent to Email" });
             }
         })
@@ -317,6 +310,7 @@ app.put('/reset-password', async (req, res) => {
         res.status(500).send({ message: "internal servier error" });
     }
 
+    // Ausgabe aus der Konsolle von dem Token: 
     //[0] reset-password token: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
     //eyJlbWFpbCI6Ijc5eHg5N0BnbWFpbC5jb20iL
     //CJpYXQiOjE3MDEwMDY1MTV9.rtVsMk2T6iw8pYB8PHwty8b6N7N31v5oCEkOXRRWSus
@@ -328,23 +322,23 @@ app.post("/changeuser", limiter, async (req, res) => {
     console.log(req.body);
     const { oldusername, firstName, lastName, email, username } = req.body;
     if (!firstName || !email || !username || !lastName || !oldusername) {
-      return res.status(400).send({ message: "Nicht alle Felder wurden ausgefüllt" });
+        return res.status(400).send({ message: "Nicht alle Felder wurden ausgefüllt" });
     }
     try {
-      const updatedUser = await UserModel.findOneAndUpdate(
-        { username: oldusername }, // Suche nach der eindeutigen ID
-        { firstName, lastName, email, username }, // Aktualisierte Daten
-        { new: true } // Gibt das aktualisierte Dokument zurück
-      );
-      if (!updatedUser) {
-        return res.status(404).send({ message: "Benutzer ist nicht vorhanden" });
-      }
-      res.status(200).send({ message: "User Profil wurde geändert", user: updatedUser });
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { username: oldusername }, // Suche nach der eindeutigen ID
+            { firstName, lastName, email, username }, // Aktualisierte Daten
+            { new: true } // Gibt das aktualisierte Dokument zurück
+        );
+        if (!updatedUser) {
+            return res.status(404).send({ message: "Benutzer ist nicht vorhanden" });
+        }
+        res.status(200).send({ message: "User Profil wurde geändert", user: updatedUser });
     } catch (error) {
-      console.error('Updatefehler:', error);
-      res.status(500).send({ message: "Error beim Ändern des Benutzers" });
+        console.error('Updatefehler:', error);
+        res.status(500).send({ message: "Error beim Ändern des Benutzers" });
     }
-  }); 
+});
 
 const addReview = async (restaurantId, newRating) => {
     const restaurant = await Restaurant.findById(restaurantId);
@@ -353,7 +347,7 @@ const addReview = async (restaurantId, newRating) => {
     restaurant.averageRating = restaurant.starRating / restaurant.reviews; // Neuer Durchschnitt
     // Speichern des aktualisierten Dokuments
     await restaurant.save();
-  };
+};
 
 
 // //erste route. prüfe ob alles ordentlich funktioniert.
