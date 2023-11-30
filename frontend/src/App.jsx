@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import './components/Login/Login.css';
-// import './components/showBox/Showbox.css';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Reviews from './components/Reviews/Reviews';
@@ -16,7 +15,7 @@ import ChangeUser from './components/Register/ChangeUser';
 function App() {
 
   const [isLoggedIn, setIsLoggedId] = useState(false);
-  const [resetAllowed, setResetAllowed] = useState (false);
+  const [resetAllowed, setResetAllowed] = useState(false);
 
   //Nummer zum Zurücksetzen.
   const [resetNumber, setResetNumber] = useState(0);
@@ -26,9 +25,9 @@ function App() {
   //nachgucken ist evlt. wo anders.
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token){
+    if (token) {
       setIsLoggedId(true);
-    } else{
+    } else {
       setIsLoggedId(false);
     }
   }, []);
@@ -41,43 +40,41 @@ function App() {
   const handleLogin = () => {
     setIsLoggedId(true);
   }
- 
+
   return (
     <AuthProvider>
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/reviews" element={<Reviews />} />
-          <Route path="/newreview" element={<NewReview />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/newreview" element={<NewReview />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
 
-          <Route path="/login/askemail" element={<ResetPage 
-          text={"Type in your Email to reset passwort"}
-            resetAllowed = {resetAllowed}
-             setResetAllowed = {setResetAllowed}
-              resetNumber = {resetNumber}
-              setResetNumber = {setResetNumber}
-          />} />
+            <Route path="/login/askemail" element={<ResetPage
+              text={"Type in your Email to reset passwort"}
+              resetAllowed={resetAllowed}
+              setResetAllowed={setResetAllowed}
+              resetNumber={resetNumber}
+              setResetNumber={setResetNumber} />} />
 
-          <Route path="/login/verify" element={<ResetPage 
-          text ={"Type in the code you received via Email"}
-            resetAllowed = {resetAllowed}
-            setResetAllowed = {setResetAllowed}
-            resetNumber = {resetNumber}
-            setResetNumber = {setResetNumber}
-          />} />
-          <Route path="/login/newpassword" element={resetAllowed ? <ResetPage 
-          text={"Type in your new Password"}
-          /> : <Navigate to= "/login"/>} />
+            <Route path="/login/verify" element={<ResetPage
+              text={"Type in the code you received via Email"}
+              resetAllowed={resetAllowed}
+              setResetAllowed={setResetAllowed}
+              resetNumber={resetNumber}
+              setResetNumber={setResetNumber} />} />
 
-          <Route path="/changeuser" element={<ChangeUser />} />
-         
-        </Routes>
-      </div>
-    </Router>
+            <Route path="/login/newpassword" element={resetAllowed ? <ResetPage
+              text={"Type in your new Password"}
+            /> : <Navigate to="/login" />} />
+
+            <Route path="/changeuser" element={<ChangeUser />} />
+          </Routes>
+        </div>
+      </Router>
     </AuthProvider>
   );
 }

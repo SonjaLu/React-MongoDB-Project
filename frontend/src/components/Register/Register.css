@@ -1,57 +1,56 @@
 #registerheadline {
-    font-size: 50px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-family: 'Lobster', sans-serif;
-    color: white;
-    z-index: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 5%;
-    text-shadow: 2px 2px 4px #000000;
+  font-size: 50px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: 'Lobster', sans-serif;
+  color: white;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5%;
+  text-shadow: 2px 2px 4px #000000;
 }
 
-
 .input-group {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 10px; 
-    height: 30px;
-  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+  height: 30px;
+}
 
-  .input-wrapper {
-    display: flex;
-    flex-direction: column; 
-    margin-top: 60px;
-  }
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
 
-  .input-group label {
-    width: 120px;
-    min-width: 120px;
-    margin-right: 10px; 
-    white-space: nowrap;
-    text-align : right;
-  }
-  
-  .input-group input {
-    flex-grow: 1;
-    display: flex;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    padding: 0 0 0 10px!important;
-    text-align: center;
-    font-family: 'Lobster', sans-serif;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30px !important;
-    margin-bottom: 8px;
-  }
+.input-group label {
+  width: 120px;
+  min-width: 120px;
+  margin-right: 10px;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.input-group input {
+  flex-grow: 1;
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 0 0 0 10px !important;
+  text-align: center;
+  font-family: 'Lobster', sans-serif;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px !important;
+  margin-bottom: 8px;
+}

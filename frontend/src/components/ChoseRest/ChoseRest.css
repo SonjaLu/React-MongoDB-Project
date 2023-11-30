@@ -3,6 +3,7 @@
     width: 100%;
     height: 100vh;
 }
+
 .ChooseYourRest-container {
     display: flex;
     flex-direction: column;
@@ -13,23 +14,27 @@
     padding-bottom: 30px;
     border-radius: 10px;
 }
+
 .ChooseYourRest-text h2 {
-    color: rgba(104,136,238,1);
+    color: rgba(104, 136, 238, 1);
     font-size: 36px;
     font-weight: 700;
 }
+
 .ChooseYourRest-text p {
-    color: rgba(104,136,238,1);
+    color: rgba(104, 136, 238, 1);
     font-size: 18px;
     font-weight: 700;
 }
+
 .underline {
     width: 300px;
     height: 6px;
-    background: rgba(148,233,206,1);
+    background: rgba(148, 233, 206, 1);
     margin-bottom: 10px;
     margin: auto;
-}    
+}
+
 /* ===================================== */
 
 .ChooseYourRest-main {
@@ -39,6 +44,7 @@
     gap: 25px;
     margin-top: 25px;
 }
+
 .ChooseYourRest-select {
     display: flex;
     align-items: center;
@@ -48,6 +54,7 @@
     background: #eaeaea;
     border-radius: 60px;
 }
+
 .ChooseYourRest-select input {
     height: 50px;
     width: 400px;
@@ -58,12 +65,14 @@
     font-size: 18px;
     padding-left: 20px;
 }
+
 .ChooseYourRest-select label {
     font-size: 18px;
     font-weight: 500;
     padding: 0 20px;
     color: #797979;
 }
+
 .ChooseYourRest-select option {
     display: block;
     height: 1rem;
@@ -72,11 +81,12 @@
     padding: 0 20px;
     color: #797979;
 }
+
 .ChooseYourRest-main button {
     width: 282px;
     height: 70px;
     border-radius: 35px;
-    background: rgba(148,233,206,1);
+    background: rgba(148, 233, 206, 1);
     border: none;
     color: #797979;
     font-size: 22px;

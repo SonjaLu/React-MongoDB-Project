@@ -23,107 +23,115 @@
 
 .restaurant-name {
   display: -webkit-box;
--webkit-line-clamp: 2; 
-
-  
-  .restaurant-card.spanisch {
-    background-color: #e74c3c; /* Rotton */
-  }
-  
-  .restaurant-card.italienisch {
-    background-color: #52be80; /* Grünton */
-  }
-  
-  .restaurant-card.balkan {
-    background-color: #b2babb; /* Grauton */
-  }
-  
-  .restaurant-card.asiatisch {
-    background-color: #5dade2; /* Blauton */
-  }
-  
-  .restaurant-card.sonstige {
-    background-color: #34495e; /* Dunkelgrauton */
-  }
-  .restaurant-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    object-position: center
-  }
-  
-  .restaurant-info {
-    padding: 10px;
-  }
-  
-  .restaurant-name {
-    margin: 0;
-    font-size: 1.2em;
-  }
-  
-  .restaurant-stars {
-    color: gold;
-    margin: 5px 0;
-  }
-  
-  .restaurant-location {
-    font-size: 0.9em;
-    color: #555;
-  }
-
-  .createbtn2 {
-    background-color: #89D1D6;
-    border: 2px solid white !important;
-    color: #333;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-    margin-top: 20px;
-    font-weight: bold;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
-    z-index: 5!important;
-  }
-  .createbtn2:hover,
-  .createbtn2:focus {
-    color: #fff;
-    outline: 0;
-    box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
-    transition: all 150ms ease-in-out;
-  }
-
-  .logoutbtn {
-    background-color: rgb(228, 13, 13);
-    border: 2px solid white !important;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
-    z-index: 5;
+  -webkit-line-clamp: 2;
 }
+
+.restaurant-card.spanisch {
+  background-color: #e74c3c;
+  /* Rotton */
+}
+
+.restaurant-card.italienisch {
+  background-color: #52be80;
+  /* Grünton */
+}
+
+.restaurant-card.balkan {
+  background-color: #b2babb;
+  /* Grauton */
+}
+
+.restaurant-card.asiatisch {
+  background-color: #5dade2;
+  /* Blauton */
+}
+
+.restaurant-card.sonstige {
+  background-color: #34495e;
+  /* Dunkelgrauton */
+}
+
+.restaurant-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center
+}
+
+.restaurant-info {
+  padding: 10px;
+}
+
+.restaurant-name {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.restaurant-stars {
+  color: gold;
+  margin: 5px 0;
+}
+
+.restaurant-location {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.createbtn2 {
+  background-color: #89D1D6;
+  border: 2px solid white !important;
+  color: #333;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  margin-top: 20px;
+  font-weight: bold;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+  z-index: 5 !important;
+}
+
+.createbtn2:hover,
+.createbtn2:focus {
+  color: #fff;
+  outline: 0;
+  box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+  transition: all 150ms ease-in-out;
+}
+
+.logoutbtn {
+  background-color: rgb(228, 13, 13);
+  border: 2px solid white !important;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+  z-index: 5;
+}
+
 .logoutbtn:hover,
 .logoutbtn:focus {
-    color: #fff;
-    outline: 0;
-    box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
-    transition: all 150ms ease-in-out;
-  }
+  color: #fff;
+  outline: 0;
+  box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+  transition: all 150ms ease-in-out;
+}
+
 .restaurant-card.deutsch {
   background-color: #f9e79f;
-  
 }
 
 .restaurant-card.deutsch .star-rating span {
@@ -132,24 +140,30 @@
 
 
 .restaurant-card.spanisch {
-  background-color: #e74c3c; /* Rotton */
+  background-color: #e74c3c;
+  /* Rotton */
 }
 
 .restaurant-card.italienisch {
-  background-color: #52be80; /* Grünton */
+  background-color: #52be80;
+  /* Grünton */
 }
 
 .restaurant-card.balkan {
-  background-color: #b2babb; /* Grauton */
+  background-color: #b2babb;
+  /* Grauton */
 }
 
 .restaurant-card.asiatisch {
-  background-color: #5dade2; /* Blauton */
+  background-color: #5dade2;
+  /* Blauton */
 }
 
 .restaurant-card.sonstige {
-  background-color: #34495e; /* Dunkelgrauton */
+  background-color: #34495e;
+  /* Dunkelgrauton */
 }
+
 .restaurant-image {
   width: 100%;
   height: 150px;
@@ -180,8 +194,9 @@
   right: 0;
   top: 0;
   height: 100vh;
-  width: 200px; 
-  background-color: #f0f0f0; /* Hintergrundfarbe der Sidebar */
+  width: 200px;
+  background-color: #f0f0f0;
+  /* Hintergrundfarbe der Sidebar */
   display: flex;
   flex-direction: column;
   justify-content: space-between;

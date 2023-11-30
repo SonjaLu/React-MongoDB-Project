@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import './ResetPassword.css';
 import { useNavigate } from 'react-router-dom';
-
 import showNotification from "../NotifcationComponents/showNotification";
 
 
@@ -36,7 +35,6 @@ const handleEmailSubmit = async (e, formRef, navigator, setResetNumber) => {
         showNotification(e.response.data.message, "red");
         console.error("Fehler bei der Anfrage des Passwort-Resets: " + error);
     }
-
 };
 
 
@@ -46,7 +44,7 @@ const handleEmailSubmit = async (e, formRef, navigator, setResetNumber) => {
 const onVerifyHandle = (e, formRef, resetNumber, setResetAllowed, navigator) => {
     e.preventDefault();
     const code = formRef.current.code.value;
-    console.log("### onVerifyHandle: " +code);
+    console.log("### onVerifyHandle: " + code);
     if (code == resetNumber) {
         showNotification("Code verified", "normal");
         console.log(code);
@@ -91,17 +89,11 @@ export default function ResetPage({ text, resetAllowed, setResetAllowed, resetNu
 
     console.log("### ResetPage: " + text);
 
-
     const navigate = useNavigate();
-    //erstmal auskommentiert. stage wird wie im Video als Parameter übergeben.
-    //const [stage, setStage] = useState(0); // 0: E-Mail, 1: Token, 2: Neues Passwort
     const [email, setEmail] = useState('');
-    //const [resetToken, setResetToken] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [emailToken, setEmailToken] = useState('');
-
-
     const [equal, setEqual] = useState(false);
     const formRef = useRef();
 
@@ -112,19 +104,7 @@ export default function ResetPage({ text, resetAllowed, setResetAllowed, resetNu
     }, [])
     console.log("emailtoken: " + emailToken);
 
-    /**
-     * Prüfe ob Passworter übereinstimmen.
-     * @param {} formRefCurrent 
-     * @param {*} setEqual 
-     */
-    /*
-    const checkPassword = (formRefCurrent, setEqual) => {
-        formRefCurrent.password.value === formRefCurrent.passwordVerify.value ?
-            setEqual(true) : setEqual(false);
-    }
-    */
-
-
+    //wichtig : den javascriptcode immer in die Klammer: {} einsetzen wenn der in return jsx ist.
     {
         // E-Mail-Phase
         if (text === "Type in your Email to reset passwort") {

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Login/LoginAuthen';
-import './RestaurantMinicard.css'; 
-// import RestaurantCard from './RestaurantCard';
+import './RestaurantMinicard.css';
 import RestaurantBigcard from './RestaurantBigcard';
 import StarRating from '../NewReview/StarRating';
-// import image from "./src/assets/image.jpg";
 
 const RestaurantCard = ({ name, pic, starRating, location, category, averageRating }) => {
     const categoryClass = category.replace(/\s+/g, '-').toLowerCase();
@@ -22,15 +20,14 @@ const RestaurantCard = ({ name, pic, starRating, location, category, averageRati
         imagePath = `${pic.replace('./src/assets/', '/assets/')}`;
     } else {
         // Fallback für fehlende oder ungültige Bildpfade
-        imagePath = '/assets/no-image.png'; 
+        imagePath = '/assets/no-image.png';
     }
     return (
         <div className={`restaurant-card ${categoryClass}`}>
-            <img src={imagePath} alt={name} className="restaurant-image"/>
+            <img src={imagePath} alt={name} className="restaurant-image" />
             <div className="restaurant-info">
                 <h3 className="restaurant-name">{name}</h3>
                 <StarRating rating={averageRating} />
-                {/* <p className="restaurant-stars">{averageRating.toFixed(1)} / 5</p> */}
                 <p className="restaurant-location">{location}</p>
             </div>
         </div>
@@ -42,7 +39,7 @@ const RestaurantCard = ({ name, pic, starRating, location, category, averageRati
 const RestaurantList = ({ restaurants }) => {
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
     const navigate = useNavigate();
-    const { logout } = useAuth(); 
+    const { logout } = useAuth();
 
     const handleCardClick = (restaurant) => {
         setSelectedRestaurant(restaurant);
@@ -62,30 +59,28 @@ const RestaurantList = ({ restaurants }) => {
     };
     return (
         <>
-       
             <div>
-            {selectedRestaurant ? (
-                <RestaurantBigcard restaurant={selectedRestaurant} onClose={handleClose} />
-               
-            ) : (
-                <div className="restaurant-list ">
-                    {restaurants.map((restaurant) => (
-                        <div className="restaurant-name" onClick={() => handleCardClick(restaurant)} key={restaurant.name}>
-                            <RestaurantCard
-                                name={restaurant.name}
-                                pic={restaurant.pic}
-                                starRating={restaurant.starRating}
-                                location={restaurant.location}
-                                category={restaurant.category}
-                                averageRating={restaurant.averageRating}
-                            />
-                        </div>
-                    ))}
-                </div>
-            )}
-            </div> 
-           
-    </>
+                {selectedRestaurant ? (
+                    <RestaurantBigcard restaurant={selectedRestaurant} onClose={handleClose} />
+
+                ) : (
+                    <div className="restaurant-list ">
+                        {restaurants.map((restaurant) => (
+                            <div className="restaurant-name" onClick={() => handleCardClick(restaurant)} key={restaurant.name}>
+                                <RestaurantCard
+                                    name={restaurant.name}
+                                    pic={restaurant.pic}
+                                    starRating={restaurant.starRating}
+                                    location={restaurant.location}
+                                    category={restaurant.category}
+                                    averageRating={restaurant.averageRating}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 export default RestaurantList;

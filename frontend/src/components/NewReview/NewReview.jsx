@@ -1,5 +1,5 @@
 
-import React, { useRef,useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './new_review.css'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid';
@@ -28,9 +28,9 @@ const NewReview = () => {
   const [description, setDescription] = useState('');
 
   const germanStates = [
-    "Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", 
-    "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", 
-    "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", 
+    "Baden-Württemberg", "Bayern", "Berlin", "Brandenburg",
+    "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern",
+    "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz",
     "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen", "not sure"
   ];
 
@@ -51,7 +51,7 @@ const NewReview = () => {
 
   const handleRatingChange = (event) => {
     setStarRating(Number(event.target.value));
-};
+  };
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
@@ -62,16 +62,11 @@ const NewReview = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
-   
-    //navigate('/reviews'); 
-
-
     const form = formRef.current;
     if (isNaN(starRating) || starRating < 1 || starRating > 5) {
       console.error("Star Rating is not valid:", starRating);
       return;
-  }
+    }
 
     const formData = new FormData();
     formData.append("id", uuidv4());
@@ -79,16 +74,13 @@ const NewReview = () => {
     formData.append("category", category);
     formData.append("location", form.location.value);
     formData.append("state", form.state.value);
-  
+
     // Füge das Bild nur hinzu, wenn es ausgewählt wurde
     if (form.image.files[0]) {
       formData.append("pic", form.image.files[0]);
     }
     formData.append("numericStarRating", starRating);
-
- 
     formData.append("description", form.review.value);
-
     formData.append("username", username);
     console.log("Star Rating Type:", typeof starRating, "Value:", starRating);
     try {
@@ -102,7 +94,7 @@ const NewReview = () => {
       };
       await axios(config);
       navigate('/reviews');
-    }  catch (error) {
+    } catch (error) {
       if (error.response) {
         console.error("Server responded with an error:", error.response.data);
       } else if (error.request) {
@@ -110,33 +102,30 @@ const NewReview = () => {
       } else {
         console.error("Error setting up the request:", error.message);
       }
-
     }
   };
-  
+
   return (
     <div className="restaurant-form">
       <h2>Create new Restaurant Review</h2>
       <hr />
 
       <div>
-      <label className="username">User: {username}</label>
+        <label className="username">User: {username}</label>
         <hr />
       </div>
 
       <form ref={formRef} onSubmit={handleSubmit}>
-      {/* <input type="hidden" name="username" value={username} /> */}
         <label htmlFor="name">Restaurant name:</label>
         <input type="text" className="name" name="name"
           required value={name} onChange={e => setName(e.target.value)} />
-
         <label htmlFor="category">Choose Category:</label>
         <select id="category" name="category"
-        className={getCategoryClass(category)} 
+          className={getCategoryClass(category)}
           value={category}
           onChange={handleCategoryChange}
           required>
-            <option value="">Please select</option>
+          <option value="">Please select</option>
           <option value="italienisch">Italienisches Restaurant</option>
           <option value="deutsch">Deutsches Restaurant</option>
           <option value="asiatisch">Asiatisches Restaurant</option>
@@ -148,34 +137,21 @@ const NewReview = () => {
         <label htmlFor="location">Location:</label>
         <input type="text" className="location" name="location"
           required value={location} onChange={e => setLocation(e.target.value)} />
-
-
         <label htmlFor="state">State:</label>
-        <select 
-        id="state" 
-        name="state"
-        value={state}
-        onChange={e => setState(e.target.value)}
-        required
-      >
-        <option value="">Please select</option>
-        {germanStates.map((state, index) => (
-          <option key={index} value={state}>{state}</option>
-        ))}
-      </select>
-        
-          {/* required value={state} onChange={e => setState(e.target.value)} /> */}
-          <div className="file-upload">
-  <FileUpload />
-</div>
-        {/* <div className="file-upload">
-          <input
-            className="image"
-            type="file"
-            accept="image/*"
-            name="image"/>
-          
-        </div><br /> */}
+        <select
+          id="state"
+          name="state"
+          value={state}
+          onChange={e => setState(e.target.value)}
+          required>
+          <option value="">Please select</option>
+          {germanStates.map((state, index) => (
+            <option key={index} value={state}>{state}</option>
+          ))}
+        </select>
+        <div className="file-upload">
+          <FileUpload />
+        </div>
 
         <label>Star rating:</label>
         <div className="rating">
@@ -213,10 +189,7 @@ const NewReview = () => {
         <label htmlFor="review">Text Review:</label>
         <textarea className="review" name="review" required value={description}
           onChange={e => setDescription(e.target.value)}></textarea>
-
-        {/* <input id="submit-input" type="submit" className="submit" value="Send Review" /> */}
         <input type="submit" className="submit" value="Send Review" />
-
       </form>
     </div>
   )

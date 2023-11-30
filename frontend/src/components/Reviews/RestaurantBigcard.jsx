@@ -12,20 +12,6 @@ const RestaurantBigcard = ({ restaurant, onClose }) => {
 
     if (!restaurant) return null;
 
-    // let imagePath;
-    //     if (pic.startsWith('http')) {
-    //         // Für hochgeladene Bilder aus externen Quellen
-    //         imagePath = pic;
-    //     } else if (pic.includes('/uploads/')) {
-    //         // Für hochgeladene Bilder im "public/uploads"-Ordner
-    //         imagePath = `/uploads/${pic.split('/uploads/').pop()}`;
-    //     } else if (pic.startsWith("./src/assets")) {
-    //         // Für statische Bilder im "public/assets"-Ordner
-    //         imagePath = `${pic.replace('./src/assets/', '/assets/')}`;
-    //     } else {
-    //         // Fallback für fehlende oder ungültige Bildpfade
-    //         imagePath = '/assets/no-image.png'; 
-    //     }
     const getImagePath = (pic) => {
         if (pic.startsWith('http')) {
             return pic;

@@ -1,4 +1,3 @@
-
 .restaurant-form {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -10,14 +9,14 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
 }
 
-.image{
+.image {
   width: 80%;
   margin: 0 auto;
   padding: 5px;
   text-align: center;
   display: inline-flex;
-  
 }
+
 h1 {
   color: #333;
 }
@@ -35,28 +34,30 @@ label {
   text-align: center;
   background-color: #85C8D9;
 }
+
 #category {
   width: 60%;
   padding: 5px;
   margin-bottom: 15px;
   border-radius: 5px;
   text-align: center;
- 
+
 }
+
 input[type="text"] {
   width: 80%;
   padding: 5px;
   margin-bottom: 15px;
 }
 
-.uploadbtn{
+.uploadbtn {
   cursor: pointer;
-    background-color: #89D1D6;
-    border: 1px solid white;
-    border-radius: 5px;
-    position: relative;
-    padding: 5px 20px;
-    margin-top: 5px;
+  background-color: #89D1D6;
+  border: 1px solid white;
+  border-radius: 5px;
+  position: relative;
+  padding: 5px 20px;
+  margin-top: 5px;
 }
 
 textarea {
@@ -83,28 +84,29 @@ textarea {
 .rating label {
   display: inline-block;
   cursor: pointer;
-  color: #ccc; /* Standardfarbe der Sterne */
+  color: #ccc;
+  /* Standardfarbe der Sterne */
 }
 
 .rating label::before {
   content: "\2605";
 }
 
-.rating input:checked ~ label::before {
-  color: #f7d222; /* Gelbe Farbe für ausgewählte Sterne */
+.rating input:checked~label::before {
+  color: #f7d222;
+  /* Gelbe Farbe für ausgewählte Sterne */
 }
 
 
- input[type="submit"] {
+input[type="submit"] {
   background-color: #007BFF;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 60%!important;
-  text-align: center!important;
-  
+  width: 60% !important;
+  text-align: center !important;
 }
 
 input[type="submit"]:hover {
@@ -112,24 +114,25 @@ input[type="submit"]:hover {
 }
 
 .italian-style {
-  background-color: #52be80; 
+  background-color: #52be80;
 }
 
 .deutsch-style {
-  background-color: #f9e79f; 
+  background-color: #f9e79f;
 }
+
 .asiatisch-style {
-  background-color: #5dade2; 
+  background-color: #5dade2;
 }
 
 .balkan-style {
-  background-color: #b2babb; 
+  background-color: #b2babb;
 }
 
 .spanisch-style {
-  background-color: #e74c3c; 
+  background-color: #e74c3c;
 }
 
 .sonstige-style {
-  background-color: #34495e; 
+  background-color: #34495e;
 }

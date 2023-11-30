@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './FileUpload.css'; 
+import './FileUpload.css';
 
 function FileUpload() {
   const [fileName, setFileName] = useState('No picture selected');

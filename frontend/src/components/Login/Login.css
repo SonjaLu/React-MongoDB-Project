@@ -17,7 +17,8 @@
     margin-bottom: 30px;
 }
 
-.username, .password {
+.username,
+.password {
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 2px;
@@ -39,6 +40,3 @@
     text-align: right;
     margin-bottom: 50px;
 }
-
-
-  

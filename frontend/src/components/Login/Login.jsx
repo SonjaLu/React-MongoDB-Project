@@ -1,37 +1,9 @@
-
-/**
- * sergej@2023-11-04 - Formular für den Login.
- * @returns 
- */
-/*
-function Login (){
-    return  (
-        <div>
-            <form>
-            <label for="username">Benutzername:</label>
-            <input type="text" className="username" name="username" required/>
-            <br></br>
-
-            <label for="password">Password:</label>
-            <input type="password" className="password" name="password" required/>
-            <br></br>
-
-            <input type="submit" value="Einloggen"/>
-            </form>
-
-            <p><a href="#">Passwort vergessen</a></p>
-            <p>Noch kein Account ? <a href ="#">Registrieren</a> </p>
-      </div>
-    )
-}
-*/
 import React, { createContext, useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css'; 
+import './Login.css';
 import '../../App.css';
 import { useAuth } from './LoginAuthen';
-// import ForgotPassword from './ForgotPassword';
 
 
 
@@ -64,7 +36,7 @@ function Login() {
       if (resp.status === 200) {
         // Erfolgreiche Authentifizierung
         console.log("Eingeloggter Benutzername:", username);
-        login(username); 
+        login(username);
         navigate('/NewReview');
       } else {
         // Fehlgeschlagene Authentifizierung
@@ -82,7 +54,7 @@ function Login() {
 
   return (
     <>
-      <h1 id="headline">GOURMET<br/> EXPLORER</h1>
+      <h1 id="headline">GOURMET<br /> EXPLORER</h1>
       <div className="showbox2">
         <h1 id="loginheadline">Login</h1>
         <form onSubmit={handleSubmit}>
@@ -94,8 +66,7 @@ function Login() {
               name="username"
               required
               value={username}
-              onChange={e => setUsername(e.target.value)}
-            />
+              onChange={e => setUsername(e.target.value)} />
           </div>
           <div>
             <label htmlFor="password">Password:</label>
@@ -105,12 +76,10 @@ function Login() {
               name="password"
               required
               value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
+              onChange={e => setPassword(e.target.value)} />
           </div>
-          <div className="
-          ">
-            <Link to="/login/askemail">Forgot Password?</Link> 
+          <div className="">
+            <Link to="/login/askemail">Forgot Password?</Link>
           </div>
           <button id="submitbtn" type="submit" style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
             Submit
@@ -126,5 +95,4 @@ function Login() {
 }
 
 export default Login;
-  
-  
+

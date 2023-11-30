@@ -1,11 +1,10 @@
 import { useState } from 'react';
 
-// const useRestaurantReviews = () => {
-  export default function useRestaurantReviews() {
+export default function useRestaurantReviews() {
   const [showRestaurants, setShowRestaurants] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
 
-  
+
   const fetchRestaurants = async (sortType = '') => {
     let url = 'http://localhost:8081/api/restaurants';
     if (sortType) {
@@ -36,5 +35,3 @@ import { useState } from 'react';
 
   return { showRestaurants, restaurants, showAllReviews, fetchSortedByState, fetchSortedAlphabetically };
 };
-
-// export default useRestaurantReviews;

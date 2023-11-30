@@ -1,39 +1,38 @@
 import React from 'react';
-import useRestaurantReviews from './useRestaurantReviews'; 
-import RestaurantList from './RestaurantMinicard.jsx'; 
+import useRestaurantReviews from './useRestaurantReviews';
+import RestaurantList from './RestaurantMinicard.jsx';
 import './Reviews.css';
 import { useNavigate } from 'react-router-dom';
 
 
 function Reviews() {
   const { showRestaurants, restaurants, fetchSortedByState, fetchSortedAlphabetically, showAllReviews } = useRestaurantReviews();
-  
+
   const navigator = useNavigate();
   const handleCreateReview = () => {
     navigator('/newreview');
   };
 
   const handleLogout = () => {
-    
-     navigator('/login') 
+    navigator('/login')
   };
 
   return (
-    
+
     <div>
-    <div className="containerbox" style={{ display: showRestaurants ? 'none' : 'block' }}>
-      <h2>Thank you for your review</h2>
-      <button className="animbtn" onClick={showAllReviews}>Show All Reviews</button>
-    </div>
+      <div className="containerbox" style={{ display: showRestaurants ? 'none' : 'block' }}>
+        <h2>Thank you for your review</h2>
+        <button className="animbtn" onClick={showAllReviews}>Show All Reviews</button>
+      </div>
 
-    <div className="containerbox" style={{ display: showRestaurants ? 'none' : 'block' }}>
-      <h2>Change User Profile</h2>
-      <button className="animbtn" onClick={() => navigator("/changeuser")}>
-        Change Profile
-      </button>
-    </div>
+      <div className="containerbox" style={{ display: showRestaurants ? 'none' : 'block' }}>
+        <h2>Change User Profile</h2>
+        <button className="animbtn" onClick={() => navigator("/changeuser")}>
+          Change Profile
+        </button>
+      </div>
 
-    {showRestaurants && (
+      {showRestaurants && (
         <div className="main-content">
           <div className="restaurant-list-container">
             <RestaurantList restaurants={restaurants} />

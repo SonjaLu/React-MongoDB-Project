@@ -1,74 +1,71 @@
-
 #submitbtn {
-    width: 155px;
-    height: 50px;
-    margin: 20px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    color: white;
-    border-radius: 10px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-decoration: none;
-    transition: 0.5s;
-    overflow: hidden;
-    backdrop-filter: blur(15px);
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
-    z-index: 3;
-    position: relative;
-    text-shadow: none;
-  }
-  
-  #submitbtn:hover {
-    letter-spacing: 3px;
-    color:rgb(84, 117, 159);
-    backdrop-filter: blur(10px);
-  }
-  
-  #submitbtn:before,
-  #submitbtn:after {
-    content: '';
-    position: absolute;
-    transition: 0.5s;
-    opacity: 0; 
-    transition-delay: 0s;
-    z-index: -1;
-    background: rgb(140, 216, 212);
-    box-shadow: 0 0 5px rgb(140, 216, 212),0 0 15px rgb(140, 216, 212),0 0 30px rgb(140, 216, 212),0 0 60px rgb(140, 216, 212);
-  }
-  
-  #submitbtn:before {
-    top: 0;
-    left: 50%;
-    width: 80%;
-    height: 50%;
-    background: rgb(140, 216, 212);
-    border-radius: 10px;
-    transform: translateX(-50%) translateY(-100%); 
-    
-  }
-  
-  #submitbtn:hover:before {
-    opacity: 1; 
-    transform: translateX(-50%) translateY(0%); 
-    
-  }
-  
-  #submitbtn:after {
-    bottom: 0;
-    left: 50%;
-    width: 80%;
-    height: 50%;
-    background: rgb(140, 216, 212);
-    border-radius: 10px;
-    transform: translateX(-50%) translateY(100%); 
-  }
-  
-  #submitbtn:hover:after {
-    opacity: 1; 
-    transform: translateX(-50%) translateY(0%); 
-  }
+  width: 155px;
+  height: 50px;
+  margin: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  color: white;
+  border-radius: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: 0.5s;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+  z-index: 3;
+  position: relative;
+  text-shadow: none;
+}
+
+#submitbtn:hover {
+  letter-spacing: 3px;
+  color: rgb(84, 117, 159);
+  backdrop-filter: blur(10px);
+}
+
+#submitbtn:before,
+#submitbtn:after {
+  content: '';
+  position: absolute;
+  transition: 0.5s;
+  opacity: 0;
+  transition-delay: 0s;
+  z-index: -1;
+  background: rgb(140, 216, 212);
+  box-shadow: 0 0 5px rgb(140, 216, 212), 0 0 15px rgb(140, 216, 212), 0 0 30px rgb(140, 216, 212), 0 0 60px rgb(140, 216, 212);
+}
+
+#submitbtn:before {
+  top: 0;
+  left: 50%;
+  width: 80%;
+  height: 50%;
+  background: rgb(140, 216, 212);
+  border-radius: 10px;
+  transform: translateX(-50%) translateY(-100%);
+}
+
+#submitbtn:hover:before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0%);
+}
+
+#submitbtn:after {
+  bottom: 0;
+  left: 50%;
+  width: 80%;
+  height: 50%;
+  background: rgb(140, 216, 212);
+  border-radius: 10px;
+  transform: translateX(-50%) translateY(100%);
+}
+
+#submitbtn:hover:after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0%);
+}
