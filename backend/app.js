@@ -340,14 +340,48 @@ app.post("/changeuser", limiter, async (req, res) => {
     }
 });
 
-const addReview = async (restaurantId, newRating) => {
-    const restaurant = await Restaurant.findById(restaurantId);
-    restaurant.starRating += newRating; // Update der Gesamtbewertung
-    restaurant.reviews += 1; // Erhöhung der Anzahl der Bewertungen
-    restaurant.averageRating = restaurant.starRating / restaurant.reviews; // Neuer Durchschnitt
-    // Speichern des aktualisierten Dokuments
-    await restaurant.save();
-};
+// app.post("/addOrUpdateReview", upload.single("pic"), async (req, res) => {
+//     try {
+//         const { restaurantId, name, category, location, state, description, username, numericStarRating } = req.body;
+//         let restaurant;
+
+//         if (restaurantId) {
+//             // Überprüfe, ob das Restaurant anhand der ID existiert
+//             restaurant = await RestaurantModel.findById(restaurantId);
+//         } else {
+//             // Überprüfe, ob das Restaurant anhand von Name und Ort existiert
+//             restaurant = await RestaurantModel.findOne({ name, location });
+//         }
+
+//         const starRating = parseFloat(numericStarRating);
+//         if (isNaN(starRating) || starRating < 1 || starRating > 5) {
+//             return res.status(400).send({ message: "numericStarRating not valid" });
+//         }
+
+//         if (restaurant) {
+//             // Füge die Bewertung zum existierenden Restaurant hinzu
+//             restaurant.reviews.push({ description, username, numericStarRating });
+//             restaurant.averageRating = calculateNewAverage(restaurant.reviews);
+//             await restaurant.save();
+//             res.status(200).send({ message: "Review updated for existing restaurant" });
+//         } else {
+//             // Erstelle ein neues Restaurant
+//             let pic = req.file ? `/uploads/${req.file.filename}` : "";
+//             const newRestaurant = new RestaurantModel({
+//                 name, category, location, state, pic,
+//                 reviews: [{ description, username, starRating }],
+//                 averageRating: starRating
+//             });
+//             await newRestaurant.save();
+//             res.status(201).send({ message: "New restaurant and review added" });
+//         }
+
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send({ message: "Error processing review" });
+//     }
+// });
+
 
 
 // //erste route. prüfe ob alles ordentlich funktioniert.
