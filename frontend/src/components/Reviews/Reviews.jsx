@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useRestaurantReviews from './useRestaurantReviews';
 import RestaurantList from './RestaurantMinicard.jsx';
 import './Reviews.css';
@@ -7,18 +7,26 @@ import { useNavigate } from 'react-router-dom';
 
 function Reviews() {
   const { showRestaurants, restaurants, fetchSortedByState, fetchSortedAlphabetically, showAllReviews } = useRestaurantReviews();
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigator = useNavigate();
   const handleCreateReview = () => {
     navigator('/newreview');
   };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
 
   const handleLogout = () => {
     navigator('/login')
   };
 
   return (
-
+   <div>
+     <div className="burger-menu" onClick={toggleMenu}>
+      ☰
+    </div>
     <div>
       <div className="containerbox" style={{ display: showRestaurants ? 'none' : 'block' }}>
         <h2>Thank you for your review</h2>
@@ -37,7 +45,8 @@ function Reviews() {
           <div className="restaurant-list-container">
             <RestaurantList restaurants={restaurants} />
           </div>
-          <div id="barBox">
+      
+          <div id="barBox" className={isMenuOpen ? "menu-open" : "menu-closed"}>
             <button className="createbtn2" onClick={handleCreateReview}>
               Create new Review
             </button>
@@ -57,8 +66,11 @@ function Reviews() {
         </div>
       )}
     </div>
+    </div>
+    
   );
 }
+
 
 export default Reviews;
 

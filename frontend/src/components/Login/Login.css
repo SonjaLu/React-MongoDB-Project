@@ -100,4 +100,21 @@
       top: 50%;
     }
   }
+
+  @media (max-width: 750px) {
+
+    label {
+      margin-left: 10px!important;
+    }
+    input, a {
+      margin-left: 10px;
+    }}
+
+  @media (max-width: 700px) {
+    .login-left-image {
+        display: none;
+    }
+    .login-right-image{
+      display: none;
+    }}
   
