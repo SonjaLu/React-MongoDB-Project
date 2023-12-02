@@ -54,3 +54,9 @@
   height: 30px !important;
   margin-bottom: 8px;
 }
+
+@media (max-width: 1100px) {
+  .input-group input {
+      margin-right: 10px;
+  }
+}

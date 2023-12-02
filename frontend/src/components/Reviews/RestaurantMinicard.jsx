@@ -64,7 +64,7 @@ const RestaurantList = ({ restaurants }) => {
                     <RestaurantBigcard restaurant={selectedRestaurant} onClose={handleClose} />
 
                 ) : (
-                    <div className="restaurant-list ">
+                    <div className="restaurant-list">
                         {restaurants.map((restaurant) => (
                             <div className="restaurant-name" onClick={() => handleCardClick(restaurant)} key={restaurant.name}>
                                 <RestaurantCard

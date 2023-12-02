@@ -48,9 +48,9 @@ const RestaurantBigcard = ({ restaurant, onClose }) => {
                 </div>
             </div>
             <button className="longbtn" onClick={onClose}>&#8592; back </button>
-            <button className="createbtn2" onClick={handleCreateReview} style={{ position: 'absolute', top: '10px', right: '10px' }}>
+            {/* <button className="createbtn2" onClick={handleCreateReview} style={{ position: 'absolute', top: '10px', right: '10px' }}>
                 Create new Review
-            </button>
+            </button> */}
         </>
     );
 };

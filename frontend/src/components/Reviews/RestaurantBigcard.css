@@ -72,3 +72,21 @@
   box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
   transition: all 150ms ease-in-out;
 }
+
+@media (max-width: 850px) {
+  .details-container {
+    flex-direction: column; 
+  }
+
+  .res-big-card {
+    margin-right: 0;
+
+  .comments-section {
+    order: 3; 
+  }
+
+  .longbtn {
+    order: 2; 
+    margin-top: 10px;
+  }
+}

@@ -13,7 +13,7 @@
 }
 
 .animbtn {
-  min-width: 300px;
+  width: 300px;
   min-height: 60px;
   font-family: 'Nunito', sans-serif;
   font-size: 22px;
@@ -21,7 +21,6 @@
   letter-spacing: 1.3px;
   font-weight: 700;
   color: #313133;
-  background: #89D1D6;
   background: linear-gradient(90deg, rgba(129, 230, 217, 1) 0%, rgba(79, 209, 197, 1) 100%);
   border: none;
   border-radius: 1000px;
@@ -139,10 +138,11 @@ button:focus::after {
   display: flex;
   width: 100%;
   height: 100vh;
+  overflow-y: scroll;
 }
 
 .restaurant-list-container {
-  overflow-y: scroll;
+  
   width: 90%;
   height: 100%;
   margin-top: 15px;
@@ -165,4 +165,91 @@ button:focus::after {
   font-weight: bold;
   box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
   z-index: 5 !important;
+}
+
+@media (max-width: 850px) {
+.restaurant-list-container {
+  width:75%;
+}
+#barBox {
+  width:25%;
+}
+}
+@media (max-width: 400px) {
+  .containerbox {
+    width: 250px!important;
+  }
+  h2 {
+    font-size: 25px;
+  }
+  .animbtn {
+    width: 150px;
+   font-size: 16px;
+   font-weight: 600;
+   padding: 0;
+  }
+  .animbtn::before {
+    width: calc(150px + 12px);
+  }
+  @keyframes ring {
+    0% {
+      width: 20px;
+      height: 20px;
+      opacity: 1;
+    }
+    100% {
+      width: 200px; 
+      height: 200px;
+      opacity: 0;
+    }
+  }
+}
+
+
+.burger-menu {
+  display: none;
+  cursor: pointer;
+  
+}
+
+
+@media (max-width: 500px) {
+  .burger-menu {
+    display: block;
+    font-size: 80;
+    font-weight: 700;
+    position: fixed;
+    right: 30px; 
+    top: 10px; 
+    cursor: pointer;
+border: 1px solid white;
+padding: 8px;
+border-radius: 5px;
+  }
+
+  #barBox {
+    display: none; 
+  }
+  #barBox.menu-open {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    background-color: darkslategrey;
+    height:15%;
+    padding-left:15px;
+  }
+
+ 
+  .createbtn2, .sidebar-button{
+    margin-left: 8px;
+    margin-top:10px;
+  }
+}
+
+@media (max-width: 420px) {
+  #barBox.menu-closed {
+    height:20%;
+  }
 }

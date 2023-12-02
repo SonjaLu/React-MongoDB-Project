@@ -213,3 +213,13 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+@media (max-width: 500px) {
+  .restaurant-list{
+    margin-top:180px;
+    align-items: center;
+    justify-content: center;
+    margin-left:50px;
+    
+  }
+}
