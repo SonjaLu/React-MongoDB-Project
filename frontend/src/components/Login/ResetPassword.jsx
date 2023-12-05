@@ -3,38 +3,15 @@ import axios from 'axios';
 import './ResetPassword.css';
 import { useNavigate } from 'react-router-dom';
 import showNotification from "../NotifcationComponents/showNotification";
+import { requestEmail } from '../../util/requestEmail';
+import { resetPassword } from '../../util/resetPassword';
+
 
 
 const handleEmailSubmit = async (e, formRef, navigator, setResetNumber) => {
     e.preventDefault();
     console.log("### handleEmailSubmit");
-    const email = formRef.current.email.value;
-    console.log("form: " + email);
-
-    const config = {
-        url: "http://localhost:8081/request-reset",
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        data: {
-            email: email
-        }
-    }
-    try {
-        const response = await axios(config);
-        console.log("##### test: " + response);
-        console.log("##### emailtoken in frontend: " + response.data.token);
-
-        showNotification(response.data.message, 'normal');
-        setResetNumber(response.data.code);
-        localStorage.setItem("resetEmail", response.data.token);
-        navigator("/login/verify");
-
-    } catch (error) {
-        showNotification(e.response.data.message, "red");
-        console.error("Fehler bei der Anfrage des Passwort-Resets: " + error);
-    }
+    requestEmail(formRef,navigator,showNotification, setResetNumber);
 };
 
 
@@ -58,31 +35,7 @@ const onVerifyHandle = (e, formRef, resetNumber, setResetAllowed, navigator) => 
 };
 
 const onPasswordHandle = async (e, formRef, navigator, emailToken, setEmailToken) => {
-    const newPassword = formRef.current.password.value;
-    const config = {
-        url: "http://localhost:8081/reset-password",
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${emailToken}`
-        },
-        data: {
-            password: newPassword
-        }
-    }
-
-
-    try {
-        const response = axios(config);
-        console.log("## onPasswordHandle response: " + response);
-        showNotification(response.data.message, "normal");
-        setEmailToken("");
-        localStorage.removeItem("resetEmail");
-        navigator("/login");
-    } catch (e) {
-        showNotification(e.response.data.message, "red");
-        console.log("Error bei reset passsss " + e);
-    }
+    resetPassword(formRef, navigator, emailToken, setEmailToken);
 }
 
 export default function ResetPage({ text, resetAllowed, setResetAllowed, resetNumber, setResetNumber }) {

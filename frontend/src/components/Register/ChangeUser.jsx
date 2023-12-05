@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './ChangeUser.css';
-import axios from 'axios'
-import { v4 as uuidv4 } from 'uuid';
-
+import { changeUser } from '../../util/changeUser';
 
 const ChangeUser = ({ id }) => {
   const navigate = useNavigate();
@@ -15,34 +13,7 @@ const ChangeUser = ({ id }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const form = formRef.current;
-    const formData = {
-      oldusername: JSON.parse(localStorage.getItem("user")).username,
-      firstName: form.firstName.value,
-      lastName: form.lastName.value,
-      email: form.email.value,
-      username: form.newUsername.value,
-    }
-    console.log(formData)
-    const config = {
-      url: "http://localhost:8081/changeuser",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: formData
-    }
-
-    try {
-      const resp = await axios(config);
-      console.log(resp);
-      //navigiere zu login
-      navigate('/login');
-    } catch (error) {
-      // Fehlerbehandlung
-      console.error('Updatefehler:', error);
-    }
+    changeUser(formRef, navigate);
   };
 
   const onCloseRegister = () => {

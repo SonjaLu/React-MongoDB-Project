@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Login/LoginAuthen';
 import FileUpload from './FileUpload';
+import { createNewReview } from '../../util/createNewReview';
+
 /**
  * sergej@2023-11-04 
  * Formular um die neue Bewertungen zu erstellen.
@@ -83,26 +85,8 @@ const NewReview = () => {
     formData.append("description", form.review.value);
     formData.append("username", username);
     console.log("Star Rating Type:", typeof starRating, "Value:", starRating);
-    try {
-      const config = {
-        url: "http://localhost:8081/addReview",
-        method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data"
-        },
-        data: formData
-      };
-      await axios(config);
-      navigate('/reviews');
-    } catch (error) {
-      if (error.response) {
-        console.error("Server responded with an error:", error.response.data);
-      } else if (error.request) {
-        console.error("Request made but no response received:", error.request);
-      } else {
-        console.error("Error setting up the request:", error.message);
-      }
-    }
+
+    createNewReview(formData, navigate);
   };
 
   return (
