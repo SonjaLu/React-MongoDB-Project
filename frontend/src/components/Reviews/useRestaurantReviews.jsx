@@ -17,7 +17,7 @@ export default function useRestaurantReviews() {
   };
 
   const fetchSortedAlphabetically = () => {
-    fetchRestaurants('name'); // Abrufen und Sortieren der Restaurants alphabetisch
+    fetchRestaurants('name', setRestaurants, setShowRestaurants); // Abrufen und Sortieren der Restaurants alphabetisch
   };
 
   return { showRestaurants, restaurants, showAllReviews, fetchSortedByState, fetchSortedAlphabetically };
