@@ -1,32 +1,19 @@
 import { useState } from 'react';
+import { fetchRestaurants } from '../../util/fetchRestaurants';
 
 export default function useRestaurantReviews() {
   const [showRestaurants, setShowRestaurants] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
 
-
-  const fetchRestaurants = async (sortType = '') => {
-    let url = 'http://localhost:8081/api/restaurants';
-    if (sortType) {
-      url += `?sortBy=${sortType}`; // Fügt den Sortierparameter zur URL hinzu
-    }
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setRestaurants(data);
-      setShowRestaurants(true);
-    } catch (error) {
-      console.error('Fehler beim Abrufen der Restaurants:', error);
-    }
-  };
-
   const showAllReviews = () => {
-    fetchRestaurants(); // Abrufen aller Restaurants ohne Sortierung
+    console.log("### showAllReviews");
+    fetchRestaurants('', setRestaurants, setShowRestaurants); // Abrufen aller Restaurants ohne Sortierung
   };
 
   const fetchSortedByState = () => {
-    fetchRestaurants('state'); // Abrufen und Sortieren der Restaurants nach Bundesstaat
+    console.log("### fetchSortedByState");
+
+    fetchRestaurants('state', setRestaurants, setShowRestaurants); // Abrufen und Sortieren der Restaurants nach Bundesstaat
   };
 
   const fetchSortedAlphabetically = () => {

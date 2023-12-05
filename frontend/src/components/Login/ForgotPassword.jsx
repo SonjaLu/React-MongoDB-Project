@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ForgotPassword.css';
 
+import { forgetPassword } from '../../util/forgetPassword';
+
+
 function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -10,14 +13,7 @@ function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8081/forgotpassword', { email });
-      setMessage("If an account with that email exists, instructions for resetting your password have been sent.");
-    } catch (error) {
-      console.error('Error sending password reset email:', error);
-
-      setMessage('If an account with that email exists, instructions for resetting your password have been sent.');
-    }
+    forgetPassword(email, setMessage);
   };
 
   return (
